@@ -13,7 +13,6 @@ import { initRevealSystem, initNavScrollSpy } from './lib/reveal.js';
 import { initMobileNav } from './lib/mobileNav.js';
 import { initTheme } from './lib/theme.js';
 import { initHero } from './sections/hero.js';
-import { initServicesChapters } from './sections/servicesChapters.js';
 import { initProjectBuilder } from './modal/projectBuilder.js';
 
 // Applied as early as possible (module scripts run after HTML parsing but
@@ -26,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavScrollSpy();
   initRevealSystem();
   initHero();
-  initServicesChapters();
   initProjectBuilder();
 
   window.addEventListener('load', () => {

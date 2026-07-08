@@ -11,8 +11,6 @@
 </head>
 <body>
 
-  <canvas id="gl-canvas"></canvas>
-
   <div class="page-content">
 
     <header class="header">
@@ -22,7 +20,7 @@
         </a>
 
         <nav class="nav">
-          <a href="#services-chapters" class="nav-link" data-nav-target="services-chapters">Services</a>
+          <a href="#services-section" class="nav-link" data-nav-target="services-section">Services</a>
           <a href="#products-section" class="nav-link" data-nav-target="products-section">Products</a>
           <a href="#process-section" class="nav-link" data-nav-target="process-section">Process</a>
           <a href="#cta-section" class="nav-link" data-nav-target="cta-section">Contact</a>
@@ -46,7 +44,7 @@
 
     <div class="mobile-nav-overlay">
       <nav class="mobile-nav">
-        <a href="#services-chapters" class="mobile-nav-link">Services</a>
+        <a href="#services-section" class="mobile-nav-link">Services</a>
         <a href="#products-section" class="mobile-nav-link">Products</a>
         <a href="#process-section" class="mobile-nav-link">Process</a>
         <a href="#cta-section" class="mobile-nav-link">Contact</a>
@@ -79,7 +77,7 @@
               <span>Launch Project Builder</span>
               <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </button>
-            <a href="#services-chapters" class="btn btn-secondary"><span>Explore Services</span></a>
+            <a href="#services-section" class="btn btn-secondary"><span>Explore Services</span></a>
           </div>
 
           <div class="hero-stats">
@@ -121,84 +119,98 @@
         </div>
       </div>
 
-      <!-- ================= SERVICES CHAPTERS (pinned, 3D-backed) ================= -->
-      <section id="services-chapters" class="services-chapters">
-        <div class="chapter-pin">
-          <div class="chapter-heading container">
+      <!-- ================= SERVICES ================= -->
+      <section id="services-section" class="services">
+        <div class="container">
+          <div class="section-header reveal-on-scroll">
             <span class="eyebrow">Core Capabilities</span>
+            <h2 class="section-title">What we build.</h2>
           </div>
 
-          <div class="chapter-stack container">
-            <article class="chapter" data-scene-index="0">
-              <span class="chapter-num">01</span>
-              <h2 class="chapter-title">Premium Web Engineering</h2>
-              <p class="chapter-desc">Fast, modern web platforms built with Next.js and React — engineered for conversion, not just looks.</p>
-              <ul class="chapter-bullets">
+          <div class="services-grid">
+            <article class="service-card reveal-on-scroll">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              </div>
+              <span class="service-num">01</span>
+              <h3 class="service-title">Premium Web Engineering</h3>
+              <p class="service-desc">Fast, modern web platforms built with Next.js and React — engineered for conversion, not just looks.</p>
+              <ul class="service-bullets">
                 <li>Next.js &amp; modern SPA architecture</li>
                 <li>Performance-first, responsive by default</li>
                 <li>SEO and web-vitals tuned</li>
               </ul>
             </article>
 
-            <article class="chapter" data-scene-index="1">
-              <span class="chapter-num">02</span>
-              <h2 class="chapter-title">Bespoke App Development</h2>
-              <p class="chapter-desc">Cross-platform apps with native-grade feel, from first sprint to app-store release.</p>
-              <ul class="chapter-bullets">
+            <article class="service-card reveal-on-scroll">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              </div>
+              <span class="service-num">02</span>
+              <h3 class="service-title">Bespoke App Development</h3>
+              <p class="service-desc">Cross-platform apps with native-grade feel, from first sprint to app-store release.</p>
+              <ul class="service-bullets">
                 <li>iOS, Android &amp; cross-platform</li>
                 <li>Offline-first sync</li>
                 <li>Seamless system integration</li>
               </ul>
             </article>
 
-            <article class="chapter" data-scene-index="2">
-              <span class="chapter-num">03</span>
-              <h2 class="chapter-title">Custom AI &amp; LLM Integrations</h2>
-              <p class="chapter-desc">Production RAG pipelines and multi-agent systems — not demos.</p>
-              <ul class="chapter-bullets">
+            <article class="service-card reveal-on-scroll">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.2 6.8H21l-5.6 4.1 2.2 6.8L12 15.6l-5.6 4.1 2.2-6.8L3 8.8h6.8z"/></svg>
+              </div>
+              <span class="service-num">03</span>
+              <h3 class="service-title">Custom AI &amp; LLM Integrations</h3>
+              <p class="service-desc">Production RAG pipelines and multi-agent systems — not demos.</p>
+              <ul class="service-bullets">
                 <li>RAG over your own data</li>
                 <li>Multi-agent orchestration (LangChain, LangGraph)</li>
                 <li>Secure API gateways &amp; usage governance</li>
               </ul>
             </article>
 
-            <article class="chapter" data-scene-index="3">
-              <span class="chapter-num">04</span>
-              <h2 class="chapter-title">Autonomous AI Agents</h2>
-              <p class="chapter-desc">Agentic workflows that automate 80+ hours of manual work a week.</p>
-              <ul class="chapter-bullets">
+            <article class="service-card reveal-on-scroll">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><line x1="7.4" y1="7.4" x2="11" y2="16.2"/><line x1="16.6" y1="7.4" x2="13" y2="16.2"/><line x1="8" y1="6" x2="16" y2="6"/></svg>
+              </div>
+              <span class="service-num">04</span>
+              <h3 class="service-title">Autonomous AI Agents</h3>
+              <p class="service-desc">Agentic workflows that automate 80+ hours of manual work a week.</p>
+              <ul class="service-bullets">
                 <li>n8n &amp; custom agent workflows</li>
                 <li>Self-healing tasks &amp; feedback loops</li>
                 <li>24/7 autonomous data entry</li>
               </ul>
             </article>
 
-            <article class="chapter" data-scene-index="4">
-              <span class="chapter-num">05</span>
-              <h2 class="chapter-title">Scalable Cloud &amp; DevOps</h2>
-              <p class="chapter-desc">AWS infrastructure built to survive 10–20x growth, not just launch day.</p>
-              <ul class="chapter-bullets">
+            <article class="service-card reveal-on-scroll">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a5.5 5.5 0 1 1 1.8-10.7 6 6 0 0 1 11.2 3.2 4 4 0 0 1-.5 7.5z"/></svg>
+              </div>
+              <span class="service-num">05</span>
+              <h3 class="service-title">Scalable Cloud &amp; DevOps</h3>
+              <p class="service-desc">AWS infrastructure built to survive 10–20x growth, not just launch day.</p>
+              <ul class="service-bullets">
                 <li>AWS: S3, Lambda, CloudFront, EC2</li>
                 <li>CI/CD &amp; infrastructure as code</li>
                 <li>40% faster load times, proven</li>
               </ul>
             </article>
 
-            <article class="chapter" data-scene-index="5">
-              <span class="chapter-num">06</span>
-              <h2 class="chapter-title">Shopify &amp; E-Commerce Systems</h2>
-              <p class="chapter-desc">20+ Shopify stores shipped, some scaled 10–20x in daily sales.</p>
-              <ul class="chapter-bullets">
+            <article class="service-card reveal-on-scroll">
+              <div class="service-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </div>
+              <span class="service-num">06</span>
+              <h3 class="service-title">Shopify &amp; E-Commerce Systems</h3>
+              <p class="service-desc">20+ Shopify stores shipped, some scaled 10–20x in daily sales.</p>
+              <ul class="service-bullets">
                 <li>Custom themes &amp; headless storefronts</li>
                 <li>Marketplace integrations: Amazon, eBay, Walmart</li>
                 <li>Checkout, fulfillment &amp; reconciliation automation</li>
               </ul>
             </article>
-          </div>
-
-          <div class="chapter-progress">
-            <span class="chapter-progress-label" id="chapter-progress-label">01 / 06</span>
-            <div class="chapter-progress-track"><div class="chapter-progress-fill" id="chapter-progress-fill"></div></div>
           </div>
         </div>
       </section>
@@ -306,10 +318,10 @@
           <div>
             <div class="footer-col-title">Services</div>
             <div class="footer-links">
-              <a href="#services-chapters" class="footer-link">Web Engineering</a>
-              <a href="#services-chapters" class="footer-link">AI &amp; Agents</a>
-              <a href="#services-chapters" class="footer-link">Cloud &amp; DevOps</a>
-              <a href="#services-chapters" class="footer-link">Shopify Systems</a>
+              <a href="#services-section" class="footer-link">Web Engineering</a>
+              <a href="#services-section" class="footer-link">AI &amp; Agents</a>
+              <a href="#services-section" class="footer-link">Cloud &amp; DevOps</a>
+              <a href="#services-section" class="footer-link">Shopify Systems</a>
             </div>
           </div>
           <div>
