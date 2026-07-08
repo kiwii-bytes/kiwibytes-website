@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kiwibytes — Engineering Studio for Web, AI & Commerce</title>
+  <meta name="description" content="Kiwibytes builds premium web platforms, production AI agents, and Shopify systems for fast-growing brands." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <canvas id="gl-canvas"></canvas>
+
+  <div class="page-content">
+
+    <header class="header">
+      <div class="container header-container">
+        <a href="#hero-section" class="logo">
+          <span class="logo-kiwi">kiwi</span><span class="logo-bytes">bytes</span><span class="logo-dot">.</span>
+        </a>
+
+        <nav class="nav">
+          <a href="#services-chapters" class="nav-link" data-nav-target="services-chapters">Services</a>
+          <a href="#products-section" class="nav-link" data-nav-target="products-section">Products</a>
+          <a href="#process-section" class="nav-link" data-nav-target="process-section">Process</a>
+          <a href="#cta-section" class="nav-link" data-nav-target="cta-section">Contact</a>
+        </nav>
+
+        <button class="theme-toggle" type="button" aria-label="Toggle light/dark theme">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <button class="btn btn-primary btn-desktop trigger-project-builder" type="button">
+          <span>Launch Project Builder</span>
+          <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+
+        <button class="mobile-menu-toggle" type="button" aria-label="Toggle menu">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="mobile-nav-overlay">
+      <nav class="mobile-nav">
+        <a href="#services-chapters" class="mobile-nav-link">Services</a>
+        <a href="#products-section" class="mobile-nav-link">Products</a>
+        <a href="#process-section" class="mobile-nav-link">Process</a>
+        <a href="#cta-section" class="mobile-nav-link">Contact</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle light/dark theme" style="margin-top: 1rem;">
+          <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.07" y2="4.93"/></svg>
+          <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <span>Toggle theme</span>
+        </button>
+        <button class="btn btn-primary trigger-project-builder" type="button" style="margin-top: 1rem;">
+          <span>Launch Project Builder</span>
+        </button>
+      </nav>
+    </div>
+
+    <main>
+
+      <!-- ================= HERO ================= -->
+      <section id="hero-section" class="hero">
+        <div class="container hero-container">
+          <span class="eyebrow hero-tag">Available for Q3 engagements</span>
+          <h1 class="hero-title">
+            <span class="hero-line">We engineer</span>
+            <span class="hero-line gradient-text">digital momentum.</span>
+          </h1>
+          <p class="hero-subtitle">
+            Web platforms, AI agents, and commerce systems — built by engineers who've shipped real production scale, not just prototypes.
+          </p>
+          <div class="hero-actions">
+            <button class="btn btn-primary trigger-project-builder" type="button">
+              <span>Launch Project Builder</span>
+              <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+            <a href="#services-chapters" class="btn btn-secondary"><span>Explore Services</span></a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-num">10–20x</span>
+              <span class="stat-label">Revenue growth delivered</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-num">20+</span>
+              <span class="stat-label">Shopify stores shipped</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-num">80+</span>
+              <span class="stat-label">Hours automated / day</span>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-cue">
+          <span>Scroll</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+        </div>
+      </section>
+
+      <!-- ================= MARQUEE ================= -->
+      <div class="marquee-container">
+        <div class="marquee-content">
+          <span>WEB ENGINEERING <i class="dot"></i></span>
+          <span>AI &amp; LLM INTEGRATIONS <i class="dot"></i></span>
+          <span>AUTONOMOUS AGENTS <i class="dot"></i></span>
+          <span>CLOUD &amp; DEVOPS <i class="dot"></i></span>
+          <span>SHOPIFY &amp; COMMERCE <i class="dot"></i></span>
+          <span>WEB ENGINEERING <i class="dot"></i></span>
+          <span>AI &amp; LLM INTEGRATIONS <i class="dot"></i></span>
+          <span>AUTONOMOUS AGENTS <i class="dot"></i></span>
+          <span>CLOUD &amp; DEVOPS <i class="dot"></i></span>
+          <span>SHOPIFY &amp; COMMERCE <i class="dot"></i></span>
+        </div>
+      </div>
+
+      <!-- ================= SERVICES CHAPTERS (pinned, 3D-backed) ================= -->
+      <section id="services-chapters" class="services-chapters">
+        <div class="chapter-pin">
+          <div class="chapter-heading container">
+            <span class="eyebrow">Core Capabilities</span>
+          </div>
+
+          <div class="chapter-stack container">
+            <article class="chapter" data-scene-index="0">
+              <span class="chapter-num">01</span>
+              <h2 class="chapter-title">Premium Web Engineering</h2>
+              <p class="chapter-desc">Fast, modern web platforms built with Next.js and React — engineered for conversion, not just looks.</p>
+              <ul class="chapter-bullets">
+                <li>Next.js &amp; modern SPA architecture</li>
+                <li>Performance-first, responsive by default</li>
+                <li>SEO and web-vitals tuned</li>
+              </ul>
+            </article>
+
+            <article class="chapter" data-scene-index="1">
+              <span class="chapter-num">02</span>
+              <h2 class="chapter-title">Bespoke App Development</h2>
+              <p class="chapter-desc">Cross-platform apps with native-grade feel, from first sprint to app-store release.</p>
+              <ul class="chapter-bullets">
+                <li>iOS, Android &amp; cross-platform</li>
+                <li>Offline-first sync</li>
+                <li>Seamless system integration</li>
+              </ul>
+            </article>
+
+            <article class="chapter" data-scene-index="2">
+              <span class="chapter-num">03</span>
+              <h2 class="chapter-title">Custom AI &amp; LLM Integrations</h2>
+              <p class="chapter-desc">Production RAG pipelines and multi-agent systems — not demos.</p>
+              <ul class="chapter-bullets">
+                <li>RAG over your own data</li>
+                <li>Multi-agent orchestration (LangChain, LangGraph)</li>
+                <li>Secure API gateways &amp; usage governance</li>
+              </ul>
+            </article>
+
+            <article class="chapter" data-scene-index="3">
+              <span class="chapter-num">04</span>
+              <h2 class="chapter-title">Autonomous AI Agents</h2>
+              <p class="chapter-desc">Agentic workflows that automate 80+ hours of manual work a week.</p>
+              <ul class="chapter-bullets">
+                <li>n8n &amp; custom agent workflows</li>
+                <li>Self-healing tasks &amp; feedback loops</li>
+                <li>24/7 autonomous data entry</li>
+              </ul>
+            </article>
+
+            <article class="chapter" data-scene-index="4">
+              <span class="chapter-num">05</span>
+              <h2 class="chapter-title">Scalable Cloud &amp; DevOps</h2>
+              <p class="chapter-desc">AWS infrastructure built to survive 10–20x growth, not just launch day.</p>
+              <ul class="chapter-bullets">
+                <li>AWS: S3, Lambda, CloudFront, EC2</li>
+                <li>CI/CD &amp; infrastructure as code</li>
+                <li>40% faster load times, proven</li>
+              </ul>
+            </article>
+
+            <article class="chapter" data-scene-index="5">
+              <span class="chapter-num">06</span>
+              <h2 class="chapter-title">Shopify &amp; E-Commerce Systems</h2>
+              <p class="chapter-desc">20+ Shopify stores shipped, some scaled 10–20x in daily sales.</p>
+              <ul class="chapter-bullets">
+                <li>Custom themes &amp; headless storefronts</li>
+                <li>Marketplace integrations: Amazon, eBay, Walmart</li>
+                <li>Checkout, fulfillment &amp; reconciliation automation</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="chapter-progress">
+            <span class="chapter-progress-label" id="chapter-progress-label">01 / 06</span>
+            <div class="chapter-progress-track"><div class="chapter-progress-fill" id="chapter-progress-fill"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PRODUCTS ================= -->
+      <section id="products-section" class="products">
+        <div class="container">
+          <div class="section-header reveal-on-scroll">
+            <span class="eyebrow">Proprietary Software</span>
+            <h2 class="section-title">Products we've shipped.</h2>
+          </div>
+
+          <div class="products-grid">
+            <div class="product-card reveal-on-scroll">
+              <div class="product-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h8M8 13h5"/></svg>
+              </div>
+              <span class="product-tag">AI Agent</span>
+              <h3 class="product-title">Reviewify</h3>
+              <p class="product-subtitle">Google Reviews Automation</p>
+              <p class="product-desc">Reads every new review, drafts the reply, learns your voice.</p>
+              <div class="product-metric"><strong>100%</strong> Automated Replies</div>
+            </div>
+
+            <div class="product-card reveal-on-scroll">
+              <div class="product-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 4 13c0-7 9-11 16-11 0 7-2 16-9 18z"/><path d="M4 13c0 4 3 7 7 7"/></svg>
+              </div>
+              <span class="product-tag">Health Tech</span>
+              <h3 class="product-title">Nourish</h3>
+              <p class="product-subtitle">AI Nutrition Engine</p>
+              <p class="product-desc">Snap a photo, get macros and a recipe in seconds.</p>
+              <div class="product-metric"><strong>98.4%</strong> Vision Accuracy</div>
+            </div>
+
+            <div class="product-card reveal-on-scroll">
+              <div class="product-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="M13 13l6 6"/></svg>
+              </div>
+              <span class="product-tag">RPA &amp; Extensions</span>
+              <h3 class="product-title">WebTarsus</h3>
+              <p class="product-subtitle">Open-Source Browser Automation</p>
+              <p class="product-desc">A live Chrome extension that turns plain-English instructions into browser automation.</p>
+              <div class="product-metric"><strong>0</strong> Lines of Code Required</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= PROCESS ================= -->
+      <section id="process-section" class="process">
+        <div class="container">
+          <div class="section-header reveal-on-scroll">
+            <span class="eyebrow">Our Roadmap</span>
+            <h2 class="section-title">How we build.</h2>
+          </div>
+
+          <div class="process-grid">
+            <div class="process-step reveal-on-scroll">
+              <span class="process-num">01</span>
+              <h3 class="process-title">Scope &amp; Architect</h3>
+              <p class="process-desc">Data models, architecture, and security decided before a line of code ships.</p>
+            </div>
+            <div class="process-step reveal-on-scroll">
+              <span class="process-num">02</span>
+              <h3 class="process-title">Bespoke Design</h3>
+              <p class="process-desc">Interfaces designed to convert, not just to look good.</p>
+            </div>
+            <div class="process-step reveal-on-scroll">
+              <span class="process-num">03</span>
+              <h3 class="process-title">Parallel Iteration</h3>
+              <p class="process-desc">Built in parallel across isolated environments, reviewed continuously.</p>
+            </div>
+            <div class="process-step reveal-on-scroll">
+              <span class="process-num">04</span>
+              <h3 class="process-title">Production Release</h3>
+              <p class="process-desc">Zero-downtime launches with monitoring wired in from day one.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CTA ================= -->
+      <section id="cta-section" class="cta">
+        <div class="container cta-container">
+          <span class="eyebrow">Let's build</span>
+          <h2 class="cta-title">Ready to build something that actually ships?</h2>
+          <p class="cta-desc">Tell us what you're building — get a scoped estimate back same day.</p>
+          <button class="btn btn-primary trigger-project-builder" type="button">
+            <span>Launch Project Builder</span>
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="logo"><span class="logo-kiwi">kiwi</span><span class="logo-bytes">bytes</span><span class="logo-dot">.</span></div>
+            <p class="footer-tagline">Engineering studio for web platforms, AI agents, and commerce systems.</p>
+          </div>
+          <div>
+            <div class="footer-col-title">Services</div>
+            <div class="footer-links">
+              <a href="#services-chapters" class="footer-link">Web Engineering</a>
+              <a href="#services-chapters" class="footer-link">AI &amp; Agents</a>
+              <a href="#services-chapters" class="footer-link">Cloud &amp; DevOps</a>
+              <a href="#services-chapters" class="footer-link">Shopify Systems</a>
+            </div>
+          </div>
+          <div>
+            <div class="footer-col-title">Company</div>
+            <div class="footer-links">
+              <a href="#products-section" class="footer-link">Products</a>
+              <a href="#process-section" class="footer-link">Process</a>
+              <a href="#cta-section" class="footer-link">Contact</a>
+            </div>
+          </div>
+          <div>
+            <div class="footer-col-title">Contact</div>
+            <div class="footer-links">
+              <a href="mailto:hello@kiwibytes.dev" class="footer-link">hello@kiwibytes.dev</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">© 2026 Kiwibytes. All rights reserved.</div>
+      </div>
+    </footer>
+
+    <!-- ================= PROJECT BUILDER MODAL ================= -->
+    <div class="modal-overlay" id="project-builder-modal">
+      <div class="modal-box">
+        <button class="modal-close" type="button" aria-label="Close">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+        <div class="modal-progress"><div class="progress-bar-fill" id="modal-progress-bar"></div></div>
+
+        <form id="project-builder-form">
+          <!-- Step 1 -->
+          <div class="modal-step-content active" data-step="1">
+            <div class="modal-header">
+              <span class="step-indicator">Step 1 of 3</span>
+              <h3 class="modal-title">What are we building?</h3>
+              <p class="modal-subtitle">Select all services you require for this project.</p>
+            </div>
+            <div class="services-select-grid">
+              <label class="select-card">
+                <input type="checkbox" name="services" value="web" class="hidden-checkbox">
+                <div class="card-inner">
+                  <span class="checkbox-circle"></span>
+                  <span class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+                  <span class="card-label">Web Dev</span>
+                </div>
+              </label>
+              <label class="select-card">
+                <input type="checkbox" name="services" value="app" class="hidden-checkbox">
+                <div class="card-inner">
+                  <span class="checkbox-circle"></span>
+                  <span class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>
+                  <span class="card-label">App Dev</span>
+                </div>
+              </label>
+              <label class="select-card">
+                <input type="checkbox" name="services" value="ai" class="hidden-checkbox">
+                <div class="card-inner">
+                  <span class="checkbox-circle"></span>
+                  <span class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.2 6.8H21l-5.6 4.1 2.2 6.8L12 15.6l-5.6 4.1 2.2-6.8L3 8.8h6.8z"/></svg></span>
+                  <span class="card-label">AI &amp; Automation</span>
+                </div>
+              </label>
+              <label class="select-card">
+                <input type="checkbox" name="services" value="agents" class="hidden-checkbox">
+                <div class="card-inner">
+                  <span class="checkbox-circle"></span>
+                  <span class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><line x1="7.4" y1="7.4" x2="11" y2="16.2"/><line x1="16.6" y1="7.4" x2="13" y2="16.2"/><line x1="8" y1="6" x2="16" y2="6"/></svg></span>
+                  <span class="card-label">AI Agents</span>
+                </div>
+              </label>
+              <label class="select-card">
+                <input type="checkbox" name="services" value="cloud" class="hidden-checkbox">
+                <div class="card-inner">
+                  <span class="checkbox-circle"></span>
+                  <span class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a5.5 5.5 0 1 1 1.8-10.7 6 6 0 0 1 11.2 3.2 4 4 0 0 1-.5 7.5z"/></svg></span>
+                  <span class="card-label">Cloud/DevOps</span>
+                </div>
+              </label>
+              <label class="select-card">
+                <input type="checkbox" name="services" value="shopify" class="hidden-checkbox">
+                <div class="card-inner">
+                  <span class="checkbox-circle"></span>
+                  <span class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+                  <span class="card-label">Shopify Store</span>
+                </div>
+              </label>
+            </div>
+            <span class="validation-message" id="step1-validation">Select at least one service to continue.</span>
+            <div class="modal-actions">
+              <span></span>
+              <button type="button" class="btn btn-primary modal-next"><span id="next-btn-text">Continue</span></button>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="modal-step-content" data-step="2">
+            <div class="modal-header">
+              <span class="step-indicator">Step 2 of 3</span>
+              <h3 class="modal-title">Scope &amp; budget</h3>
+              <p class="modal-subtitle">Give us a rough budget so we can recommend the right tier.</p>
+            </div>
+            <div class="range-group">
+              <div class="range-labels">
+                <span class="field-label">Budget</span>
+                <span class="range-value">$<span id="budget-value">15,000</span></span>
+              </div>
+              <input type="range" id="budget-range" class="custom-range" min="5000" max="150000" step="5000" value="15000">
+              <div class="slider-ticks"><span>$5k</span><span>$150k+</span></div>
+            </div>
+            <div class="estimator-dashboard">
+              <div class="estimator-tier active" id="tier-mvp">
+                <span class="tier-name">Starter</span>
+                <span class="tier-desc">&lt; $25k</span>
+              </div>
+              <div class="estimator-tier" id="tier-pro">
+                <span class="tier-name">Growth</span>
+                <span class="tier-desc">$25k – $75k</span>
+              </div>
+              <div class="estimator-tier" id="tier-enterprise">
+                <span class="tier-name">Enterprise</span>
+                <span class="tier-desc">&gt; $75k</span>
+              </div>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn btn-secondary modal-back">Back</button>
+              <button type="button" class="btn btn-primary modal-next"><span id="next-btn-text-2">Continue</span></button>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="modal-step-content" data-step="3">
+            <div class="modal-header">
+              <span class="step-indicator">Step 3 of 3</span>
+              <h3 class="modal-title">How do we reach you?</h3>
+              <p class="modal-subtitle">We'll send your scoped estimate within 1 business day.</p>
+            </div>
+            <div class="form-grid">
+              <div class="form-field full-width">
+                <input type="text" id="client-name" placeholder=" " required>
+                <label for="client-name">Your name</label>
+                <span class="error-text">Please enter your name.</span>
+              </div>
+              <div class="form-field full-width">
+                <input type="email" id="client-email" placeholder=" " required>
+                <label for="client-email">Email address</label>
+                <span class="error-text">Please enter a valid email.</span>
+              </div>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn btn-secondary modal-back">Back</button>
+              <button type="submit" class="btn btn-primary"><span>Submit Blueprint</span></button>
+            </div>
+          </div>
+
+          <!-- Step 4: Success -->
+          <div class="modal-step-content" data-step="4">
+            <div class="success-content">
+              <div class="success-icon-wrapper">
+                <svg class="checkmark" viewBox="0 0 52 52"><circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+              </div>
+              <h3 class="success-title">Blueprint received.</h3>
+              <p class="success-text">We've sent a copy to <span id="success-email-placeholder" class="success-highlight">you</span>. Our team will follow up within 1 business day.</p>
+              <button type="button" class="btn btn-secondary close-modal-btn" style="margin-top: 2rem;">Close</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

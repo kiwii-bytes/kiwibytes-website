@@ -1,0 +1,141 @@
+.services-chapters {
+  position: relative;
+  z-index: 1;
+}
+
+.chapter-pin {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.chapter-heading {
+  position: absolute;
+  top: 3rem;
+  left: 0;
+  right: 0;
+}
+
+.chapter-stack {
+  position: relative;
+  height: 60vh;
+  /* `.container`'s auto side-margins land on the cross-axis here (this is a
+     column-direction flex parent), which disables flex-stretch and would
+     otherwise shrink-wrap this to its content width (~0, since its children
+     are all absolutely positioned). An explicit width keeps it a definite
+     size so max-width/margin:auto center it correctly instead. */
+  width: 100%;
+}
+
+.chapter {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 640px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.chapter.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.chapter-num {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+
+.chapter-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin-bottom: 1.25rem;
+}
+
+.chapter-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin-bottom: 1.75rem;
+}
+
+.chapter-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.chapter-bullets li {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  padding-left: 1.4rem;
+  position: relative;
+}
+
+.chapter-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 7px;
+  height: 1px;
+  background-color: var(--accent);
+}
+
+.chapter-progress {
+  position: absolute;
+  bottom: 3rem;
+  left: 2.5rem;
+  right: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.chapter-progress-label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 3.5rem;
+}
+
+.chapter-progress-track {
+  flex: 1;
+  height: 2px;
+  background-color: var(--border-color);
+}
+
+.chapter-progress-fill {
+  height: 100%;
+  width: 0%;
+  background-color: var(--accent);
+}
+
+/* Mobile: no pinning/scroll-jacking (fights with browser chrome show/hide
+   and is a known perf risk) -- chapters stack in normal flow, each always
+   visible, and only the 3D scene behind the nearest one is switched on. */
+@media (max-width: 768px) {
+  .chapter-pin { position: static; height: auto; padding: 5rem 0; }
+  .chapter-heading { position: static; margin-bottom: 2.5rem; padding: 0 1.5rem; }
+  .chapter-stack { position: static; height: auto; display: flex; flex-direction: column; gap: 4.5rem; }
+  .chapter {
+    position: static;
+    opacity: 1;
+    pointer-events: auto;
+    max-width: 100%;
+    padding: 0 1.5rem;
+  }
+  .chapter-progress { display: none; }
+}
