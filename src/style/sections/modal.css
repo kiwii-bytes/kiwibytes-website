@@ -285,10 +285,11 @@
   .estimator-dashboard { grid-template-columns: 1fr; }
 }
 
-/* Below ~380px, two columns leaves too little room for labels like
-   "Cloud/DevOps" to wrap cleanly at a word boundary -- go full-width instead
-   of forcing an ugly mid-word break. */
-@media (max-width: 380px) {
+/* Below ~480px (covers most phones in portrait, not just very narrow ones),
+   two columns leaves too little room for labels like "Cloud/DevOps" to wrap
+   cleanly at a word boundary -- go full-width instead of an ugly mid-word
+   break. */
+@media (max-width: 480px) {
   .modal-overlay { padding: 1rem; }
   .modal-box { padding: 1.5rem; }
   .modal-progress { width: calc(100% - 3rem); left: 1.5rem; }
