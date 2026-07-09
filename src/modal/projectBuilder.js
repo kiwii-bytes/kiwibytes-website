@@ -142,7 +142,7 @@ export function initProjectBuilder() {
       from_name: nameInput.value.trim(),
       from_email: emailInput.value.trim(),
       services: selectedServices.join(', '),
-      budget: `$${parseInt(budgetRange.value, 10).toLocaleString()}`,
+      budget: `₹${parseInt(budgetRange.value, 10).toLocaleString('en-IN')}`,
       time: new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }),
     };
 
@@ -168,30 +168,45 @@ export function initProjectBuilder() {
     }
   });
 
+  const DEFAULT_BUDGET = 200000;
+
+  const setBudget = (value) => {
+    const budget = Math.max(50000, Math.min(5000000, value));
+    budgetRange.value = budget;
+    budgetValueText.textContent = budget.toLocaleString('en-IN');
+
+    tiers.mvp.classList.remove('active');
+    tiers.pro.classList.remove('active');
+    tiers.enterprise.classList.remove('active');
+
+    if (budget < 500000) tiers.mvp.classList.add('active');
+    else if (budget < 2000000) tiers.pro.classList.add('active');
+    else tiers.enterprise.classList.add('active');
+  };
+
   const resetModal = () => {
     currentStep = 1;
     form.reset();
     form.querySelectorAll('.form-field').forEach((f) => f.classList.remove('invalid'));
     step1ValidationMsg.style.display = 'none';
     submitError.style.display = 'none';
-    budgetValueText.textContent = '15,000';
-    tiers.mvp.classList.add('active');
-    tiers.pro.classList.remove('active');
-    tiers.enterprise.classList.remove('active');
+    setBudget(DEFAULT_BUDGET);
     updateStepView();
   };
 
-  budgetRange.addEventListener('input', (e) => {
-    const budget = parseInt(e.target.value, 10);
-    budgetValueText.textContent = budget.toLocaleString();
+  budgetRange.addEventListener('input', (e) => setBudget(parseInt(e.target.value, 10)));
 
-    tiers.mvp.classList.remove('active');
-    tiers.pro.classList.remove('active');
-    tiers.enterprise.classList.remove('active');
-
-    if (budget < 25000) tiers.mvp.classList.add('active');
-    else if (budget < 75000) tiers.pro.classList.add('active');
-    else tiers.enterprise.classList.add('active');
+  // Tier cards double as budget presets -- clicking one jumps the slider
+  // straight to a representative value for that tier, not just a display.
+  Object.values(tiers).forEach((tierEl) => {
+    const activate = () => setBudget(parseInt(tierEl.dataset.budget, 10));
+    tierEl.addEventListener('click', activate);
+    tierEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activate();
+      }
+    });
   });
 
   updateStepView();
