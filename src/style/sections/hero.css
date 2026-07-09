@@ -27,10 +27,16 @@
 .hero-line {
   display: block;
   overflow: hidden;
+  /* The char-split reveal animation needs this overflow:hidden mask, but a
+     tight line-height leaves no room below the baseline for descenders
+     (g/y/p/q/j get clipped). Pad-then-pull-back so the mask has room without
+     shifting outer layout. */
+  padding-bottom: 0.2em;
+  margin-bottom: -0.2em;
 }
 
 .hero-title .gradient-text {
-  background: linear-gradient(120deg, var(--accent) 0%, #d9f5b0 50%, var(--accent) 100%);
+  background: linear-gradient(120deg, var(--accent) 0%, var(--gradient-mid) 50%, var(--accent) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

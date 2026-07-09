@@ -104,7 +104,7 @@
 
 .services-select-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.85rem;
 }
 
@@ -121,6 +121,8 @@
   align-items: flex-start;
   gap: 0.85rem;
   height: 100%;
+  width: 100%;
+  min-width: 0;
   position: relative;
   transition: border-color 0.3s var(--ease-premium), transform 0.3s var(--ease-premium);
 }
@@ -142,7 +144,13 @@
 .hidden-checkbox:checked + .card-inner .card-icon { color: var(--accent); }
 
 .card-icon { color: var(--text-secondary); }
-.card-label { font-weight: 600; font-size: 0.88rem; }
+.card-label {
+  font-weight: 600;
+  font-size: 0.88rem;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+}
 
 .validation-message {
   color: #ff6b6b;
@@ -179,7 +187,7 @@
 
 .estimator-dashboard {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.75rem;
   margin-top: 1.5rem;
 }
@@ -273,6 +281,19 @@
 @media (max-width: 560px) {
   .modal-box { padding: 1.75rem; }
   .modal-progress { width: calc(100% - 3.5rem); left: 1.75rem; }
-  .services-select-grid { grid-template-columns: repeat(2, 1fr); }
+  .services-select-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .estimator-dashboard { grid-template-columns: 1fr; }
+}
+
+/* Below ~380px, two columns leaves too little room for labels like
+   "Cloud/DevOps" to wrap cleanly at a word boundary -- go full-width instead
+   of forcing an ugly mid-word break. */
+@media (max-width: 380px) {
+  .modal-overlay { padding: 1rem; }
+  .modal-box { padding: 1.5rem; }
+  .modal-progress { width: calc(100% - 3rem); left: 1.5rem; }
+  .services-select-grid { grid-template-columns: 1fr; }
+  .select-card .card-inner { flex-direction: row; align-items: center; }
+  .modal-actions { flex-direction: column-reverse; gap: 0.75rem; }
+  .modal-actions .btn { width: 100%; }
 }

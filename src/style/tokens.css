@@ -10,8 +10,12 @@
 
   --accent: #74c915;
   --accent-hover: #8fe01e;
+  --accent-rgb: 116, 201, 21;
   --accent-dim: rgba(116, 201, 21, 0.12);
   --accent-line: rgba(116, 201, 21, 0.35);
+  /* Gradient shimmer midpoint -- deliberately a *paler* green than accent so
+     it reads as a bright highlight against this theme's near-black bg. */
+  --gradient-mid: #d9f5b0;
 
   --border-color: rgba(255, 255, 255, 0.08);
   --border-hover: rgba(255, 255, 255, 0.2);
@@ -37,8 +41,12 @@
 
   --accent: #5a9c0f;
   --accent-hover: #4a8009;
+  --accent-rgb: 90, 156, 15;
   --accent-dim: rgba(90, 156, 15, 0.1);
   --accent-line: rgba(90, 156, 15, 0.32);
+  /* On a light background a *pale* highlight would nearly vanish -- the
+     shimmer needs to go darker/more saturated here to read as a highlight. */
+  --gradient-mid: #2f5c08;
 
   --border-color: rgba(0, 0, 0, 0.08);
   --border-hover: rgba(0, 0, 0, 0.18);

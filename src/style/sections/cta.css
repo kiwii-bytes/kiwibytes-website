@@ -24,3 +24,7 @@
   font-size: 1.1rem;
   margin-bottom: 2.5rem;
 }
+
+@media (max-width: 768px) {
+  .cta { padding: 5.5rem 0; }
+}

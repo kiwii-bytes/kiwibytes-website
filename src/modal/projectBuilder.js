@@ -1,4 +1,15 @@
+import emailjs from '@emailjs/browser';
 import { pauseScroll, resumeScroll } from '../lib/lenis-gsap.js';
+import { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY, isEmailConfigured } from '../lib/emailConfig.js';
+
+const SERVICE_LABELS = {
+  web: 'Web Dev',
+  app: 'App Dev',
+  ai: 'AI & Automation',
+  agents: 'AI Agents',
+  cloud: 'Cloud/DevOps',
+  shopify: 'Shopify Store',
+};
 
 export function initProjectBuilder() {
   const modal = document.getElementById('project-builder-modal');
@@ -114,13 +125,46 @@ export function initProjectBuilder() {
     });
   });
 
-  form.addEventListener('submit', (e) => {
+  const submitBtn = document.getElementById('submit-btn');
+  const submitBtnText = document.getElementById('submit-btn-text');
+  const submitError = document.getElementById('submit-error');
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!validateStep(3)) return;
+
+    const nameInput = document.getElementById('client-name');
     const emailInput = document.getElementById('client-email');
-    successEmailPlaceholder.textContent = emailInput.value;
-    currentStep = 4;
-    updateStepView();
+    const selectedServices = Array.from(form.querySelectorAll('input[name="services"]:checked'))
+      .map((el) => SERVICE_LABELS[el.value] || el.value);
+
+    const templateParams = {
+      from_name: nameInput.value.trim(),
+      from_email: emailInput.value.trim(),
+      services: selectedServices.join(', '),
+      budget: `$${parseInt(budgetRange.value, 10).toLocaleString()}`,
+    };
+
+    submitError.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtnText.textContent = 'Sending...';
+
+    try {
+      if (isEmailConfigured) {
+        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, { publicKey: EMAILJS_PUBLIC_KEY });
+      } else {
+        console.warn('EmailJS is not configured yet (src/lib/emailConfig.js) -- form data was not actually sent:', templateParams);
+      }
+      successEmailPlaceholder.textContent = emailInput.value;
+      currentStep = 4;
+      updateStepView();
+    } catch (err) {
+      console.error('EmailJS send failed:', err);
+      submitError.style.display = 'block';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtnText.textContent = 'Submit Blueprint';
+    }
   });
 
   const resetModal = () => {
@@ -128,6 +172,7 @@ export function initProjectBuilder() {
     form.reset();
     form.querySelectorAll('.form-field').forEach((f) => f.classList.remove('invalid'));
     step1ValidationMsg.style.display = 'none';
+    submitError.style.display = 'none';
     budgetValueText.textContent = '15,000';
     tiers.mvp.classList.add('active');
     tiers.pro.classList.remove('active');
