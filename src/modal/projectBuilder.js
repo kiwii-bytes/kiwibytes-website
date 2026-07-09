@@ -168,10 +168,10 @@ export function initProjectBuilder() {
     }
   });
 
-  const DEFAULT_BUDGET = 200000;
+  const DEFAULT_BUDGET = 75000;
 
   const setBudget = (value) => {
-    const budget = Math.max(50000, Math.min(5000000, value));
+    const budget = Math.max(10000, Math.min(500000, value));
     budgetRange.value = budget;
     budgetValueText.textContent = budget.toLocaleString('en-IN');
 
@@ -179,8 +179,8 @@ export function initProjectBuilder() {
     tiers.pro.classList.remove('active');
     tiers.enterprise.classList.remove('active');
 
-    if (budget < 500000) tiers.mvp.classList.add('active');
-    else if (budget < 2000000) tiers.pro.classList.add('active');
+    if (budget < 50000) tiers.mvp.classList.add('active');
+    else if (budget < 200000) tiers.pro.classList.add('active');
     else tiers.enterprise.classList.add('active');
   };
 
