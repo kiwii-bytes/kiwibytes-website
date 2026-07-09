@@ -143,6 +143,7 @@ export function initProjectBuilder() {
       from_email: emailInput.value.trim(),
       services: selectedServices.join(', '),
       budget: `$${parseInt(budgetRange.value, 10).toLocaleString()}`,
+      time: new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }),
     };
 
     submitError.style.display = 'none';
