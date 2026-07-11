@@ -1,12 +1,17 @@
 const STORAGE_KEY = 'kiwibytes-theme';
 
+// NOTE: this default is duplicated in the inline no-flash script in
+// BaseLayout.astro. If the two ever disagree, every visitor gets a visible
+// flash of the wrong theme on first paint. Change both together.
+export const DEFAULT_THEME = 'light';
+
 function getInitialTheme() {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored === 'light' || stored === 'dark') return stored;
-  // Dark is the designed-for default (hero, bloom, and lighting are all
-  // tuned dark-first) -- don't auto-switch to light based on system
-  // preference; light is available, but only as an explicit user choice.
-  return 'dark';
+  // Light on first visit for everyone, by product decision -- deliberately
+  // NOT following prefers-color-scheme. A returning visitor's own toggle
+  // choice always wins over this.
+  return DEFAULT_THEME;
 }
 
 export function getTheme() {

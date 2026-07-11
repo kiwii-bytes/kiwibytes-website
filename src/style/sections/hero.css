@@ -112,7 +112,7 @@
   overflow: hidden;
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-band);
   padding: 1.4rem 0;
 }
 

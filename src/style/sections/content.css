@@ -97,7 +97,7 @@
 }
 .prose ol { list-style: decimal; }
 .prose ol li { margin-bottom: 0.6rem; padding-left: 0.35rem; }
-.prose a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+.prose a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 3px; }
 .prose a:hover { color: var(--accent-hover); }
 .prose strong { color: var(--text-primary); font-weight: 700; }
 .prose code {
@@ -127,7 +127,7 @@
 /* ---------- Capabilities / track record ---------- */
 .capabilities {
   padding: 7rem 0;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-band);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 }
@@ -204,7 +204,7 @@
   transition: color 0.25s var(--ease-premium);
 }
 .faq-question::-webkit-details-marker { display: none; }
-.faq-question:hover { color: var(--accent); }
+.faq-question:hover { color: var(--accent-text); }
 
 .faq-chevron {
   flex-shrink: 0;
@@ -233,6 +233,7 @@
   background-color: var(--bg-elevated);
   border: 1px solid var(--border-color);
   border-radius: 24px;
+  box-shadow: var(--shadow-card);
   padding: 3rem;
   display: grid;
   grid-template-columns: 1.15fr 1fr;
@@ -266,7 +267,7 @@
   flex: 1 1 220px;
   min-width: 0;
   padding: 0.95rem 1.1rem;
-  background-color: var(--bg-secondary);
+  background-color: var(--bg-band);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   font-size: 0.95rem;
@@ -283,8 +284,8 @@
   min-height: 1.2em;
   color: var(--text-muted);
 }
-.newsletter-status[data-state='success'] { color: var(--accent); }
-.newsletter-status[data-state='error'] { color: #ff6b6b; }
+.newsletter-status[data-state='success'] { color: var(--accent-text); }
+.newsletter-status[data-state='error'] { color: var(--error); }
 
 /* ---------- Blog ---------- */
 .blog-grid {
@@ -300,12 +301,14 @@
   border: 1px solid var(--border-color);
   border-radius: 20px;
   padding: 2rem;
-  transition: transform 0.4s var(--ease-premium), border-color 0.4s var(--ease-premium);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.4s var(--ease-premium), border-color 0.4s var(--ease-premium), box-shadow 0.4s var(--ease-premium);
   height: 100%;
 }
 .blog-card:hover {
   transform: translateY(-6px);
   border-color: var(--accent-line);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .blog-card-meta {
@@ -341,7 +344,7 @@
   font-family: var(--font-display);
   font-size: 0.88rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .blog-card:hover .blog-card-cta svg { transform: translateX(4px); }
 .blog-card-cta svg { transition: transform 0.3s var(--ease-premium); }
@@ -353,7 +356,7 @@
   padding: 0.28rem 0.65rem;
   border-radius: 99px;
   background-color: var(--accent-dim);
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 /* Blog post */
@@ -388,7 +391,7 @@
   color: var(--text-secondary);
   margin-bottom: 2rem;
 }
-.back-link:hover { color: var(--accent); }
+.back-link:hover { color: var(--accent-text); }
 
 .empty-state {
   text-align: center;
@@ -439,7 +442,7 @@
   margin-bottom: 0.35rem;
 }
 .contact-method-value { font-size: 1.05rem; font-weight: 600; }
-.contact-method-value a { color: var(--accent); }
+.contact-method-value a { color: var(--accent-text); }
 .contact-method-value a:hover { text-decoration: underline; }
 
 .contact-promise {
@@ -461,7 +464,7 @@
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 0.95rem;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .section-link svg { transition: transform 0.3s var(--ease-premium); }
 .section-link:hover svg { transform: translateX(4px); }
@@ -494,10 +497,10 @@
   border-radius: 50%;
   background: currentColor;
 }
-.status-pill.is-live { background-color: var(--accent-dim); color: var(--accent); }
+.status-pill.is-live { background-color: var(--accent-dim); color: var(--accent-text); }
 .status-pill.is-wip {
-  background-color: rgba(160, 133, 86, 0.14);
-  color: #c79a4f;
+  background-color: var(--status-wip-bg);
+  color: var(--status-wip);
 }
 
 /* ---------- Responsive ---------- */

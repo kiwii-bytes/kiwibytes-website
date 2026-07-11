@@ -2,7 +2,6 @@
   position: relative;
   z-index: 1;
   padding: 9rem 0;
-  background-color: var(--bg-primary);
   border-top: 1px solid var(--border-color);
 }
 
@@ -18,12 +17,14 @@
   border: 1px solid var(--border-color);
   border-radius: 20px;
   padding: 2.5rem;
-  transition: transform 0.4s var(--ease-premium), border-color 0.4s var(--ease-premium);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.4s var(--ease-premium), border-color 0.4s var(--ease-premium), box-shadow 0.4s var(--ease-premium);
 }
 
 .service-card:hover {
   transform: translateY(-6px);
   border-color: var(--accent-line);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .service-icon {

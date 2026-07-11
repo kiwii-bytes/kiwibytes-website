@@ -137,6 +137,7 @@ export function initProjectBuilder() {
 
     const nameInput = document.getElementById('client-name');
     const emailInput = document.getElementById('client-email');
+    const notesInput = document.getElementById('client-notes');
     const selectedServices = Array.from(form.querySelectorAll('input[name="services"]:checked'))
       .map((el) => SERVICE_LABELS[el.value] || el.value);
 
@@ -145,7 +146,11 @@ export function initProjectBuilder() {
       from_email: emailInput.value.trim(),
       services: selectedServices.join(', '),
       budget: `₹${parseInt(budgetRange.value, 10).toLocaleString('en-IN')}`,
-      time: new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }),
+      // The notes field is optional, so send an explicit placeholder rather
+      // than an empty string -- an empty {{message}} renders as a blank gap in
+      // the email and looks like the template broke.
+      message: notesInput?.value.trim() || '(no additional notes provided)',
+      time: new Date().toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }),
     };
 
     submitError.style.display = 'none';
@@ -192,11 +197,23 @@ export function initProjectBuilder() {
     form.querySelectorAll('.form-field').forEach((f) => f.classList.remove('invalid'));
     step1ValidationMsg.style.display = 'none';
     submitError.style.display = 'none';
+    // form.reset() clears the textarea's value but not our counter readout.
+    const count = document.getElementById('notes-count');
+    if (count) count.textContent = '0';
     setBudget(DEFAULT_BUDGET);
     updateStepView();
   };
 
   budgetRange.addEventListener('input', (e) => setBudget(parseInt(e.target.value, 10)));
+
+  // Live character counter for the optional notes field.
+  const notesInput = document.getElementById('client-notes');
+  const notesCount = document.getElementById('notes-count');
+  if (notesInput && notesCount) {
+    notesInput.addEventListener('input', () => {
+      notesCount.textContent = String(notesInput.value.length);
+    });
+  }
 
   // Tier cards double as budget presets -- clicking one jumps the slider
   // straight to a representative value for that tier, not just a display.

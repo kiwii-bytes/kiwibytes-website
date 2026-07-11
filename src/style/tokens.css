@@ -1,55 +1,119 @@
+/* ==========================================================================
+   Design tokens.
+
+   LIGHT is the default (`:root`), so a no-JS visitor gets the intended theme.
+   DARK is an override on [data-theme='dark']. The inline script in
+   BaseLayout.astro always stamps data-theme before first paint, so there's no
+   flash either way.
+
+   Every text colour below was chosen against a measured WCAG contrast ratio,
+   not by eye. Notes inline.
+   ========================================================================== */
+
 :root {
-  --bg-primary: #08090a;
-  --bg-secondary: #101214;
-  --bg-elevated: #16181b;
-  --bg-overlay: rgba(8, 9, 10, 0.82);
+  /* ---------- LIGHT (default) ---------- */
+  --bg-primary: #f6f6f2;
+  --bg-secondary: #ecebe5;
+  --bg-elevated: #ffffff;
+  --bg-overlay: rgba(246, 246, 242, 0.82);
 
-  --text-primary: #f5f5f2;
-  --text-secondary: #9a9a9f;
-  --text-muted: #5c5c62;
+  --text-primary: #12130f;   /* 17.4:1 */
+  --text-secondary: #4b4c51; /* 7.9:1  — darkened; the old #55565a read washed */
+  --text-muted: #6a6b70;     /* 4.9:1  — old #8a8b8f was 3.1:1 and failed AA */
 
-  --accent: #74c915;
-  --accent-hover: #8fe01e;
-  --accent-rgb: 116, 201, 21;
-  --accent-dim: rgba(116, 201, 21, 0.12);
-  --accent-line: rgba(116, 201, 21, 0.35);
-  /* Gradient shimmer midpoint -- deliberately a *paler* green than accent so
-     it reads as a bright highlight against this theme's near-black bg. */
-  --gradient-mid: #d9f5b0;
+  /* Two accents on purpose:
+     --accent      is a FILL (buttons, icon tiles, borders, big display numbers).
+                   Vibrant. Never use it for small text in light mode — at
+                   3.1:1 it fails AA.
+     --accent-text is for TEXT (links, eyebrows, "Read →", subtitles). 5.4:1. */
+  --accent: #5a9c0f;
+  --accent-text: #3f7209;
+  --accent-hover: #4a8009;
+  --accent-rgb: 90, 156, 15;
+  --accent-dim: rgba(90, 156, 15, 0.1);
+  --accent-line: rgba(90, 156, 15, 0.32);
 
-  --border-color: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(255, 255, 255, 0.2);
+  /* Hero gradient midpoint: must go DARKER than the accent on a light bg,
+     otherwise the highlight vanishes into the background. */
+  --gradient-mid: #2f5c08;
+
+  --border-color: rgba(18, 19, 15, 0.1);
+  --border-hover: rgba(18, 19, 15, 0.22);
+
+  /* Alternating section bands. Translucent, not opaque: an opaque section
+     background would paint straight over the aurora behind it and we'd never
+     see the gradient at all. */
+  --bg-band: rgba(18, 19, 15, 0.04);
+
+  /* Hover/active surface tints. These were hardcoded to rgba(255,255,255,...),
+     which is invisible on a light background — the active nav pill simply
+     didn't show. Tinting must follow the theme. */
+  --hover-tint: rgba(18, 19, 15, 0.06);
+  --hover-tint-strong: rgba(18, 19, 15, 0.11);
+
+  --status-wip: #8a6410; /* readable amber on light */
+  --status-wip-bg: rgba(138, 100, 16, 0.1);
+  --error: #c62828;      /* 5.9:1 on white; #ff6b6b was ~3.0 and failed */
+
+  /* Cards are #fff on a #f6f6f2 page — only 1.07:1 apart, so contrast alone
+     can't make them read as objects. The shadow is what creates the depth. */
+  --shadow-card: 0 1px 2px rgba(18, 19, 15, 0.04), 0 10px 30px rgba(18, 19, 15, 0.06);
+  --shadow-card-hover: 0 2px 4px rgba(18, 19, 15, 0.05), 0 18px 44px rgba(18, 19, 15, 0.1);
+  --shadow-soft: 0 24px 70px rgba(18, 19, 15, 0.14);
+
+  /* Ambient background wash (see .bg-aurora) */
+  --aurora-1: rgba(116, 201, 21, 0.16);
+  --aurora-2: rgba(59, 91, 219, 0.09);
+  --aurora-3: rgba(200, 160, 90, 0.11);
+  --noise-opacity: 0.035;
 
   --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-display: 'Manrope', var(--font-sans);
 
   --header-height: 84px;
   --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
-
-  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
-:root[data-theme='light'] {
-  --bg-primary: #f7f7f4;
-  --bg-secondary: #edece8;
-  --bg-elevated: #ffffff;
-  --bg-overlay: rgba(247, 247, 244, 0.82);
+:root[data-theme='dark'] {
+  --bg-primary: #08090a;
+  --bg-secondary: #101214;
+  --bg-elevated: #16181b;
+  --bg-overlay: rgba(8, 9, 10, 0.82);
 
-  --text-primary: #12130f;
-  --text-secondary: #55565a;
-  --text-muted: #8a8b8f;
+  --text-primary: #f5f5f2;   /* 18.2:1 */
+  --text-secondary: #9a9a9f; /* 7.1:1  */
+  --text-muted: #86868e;     /* 4.9:1 on cards — old #5c5c62 was 2.7:1 and failed */
 
-  --accent: #5a9c0f;
-  --accent-hover: #4a8009;
-  --accent-rgb: 90, 156, 15;
-  --accent-dim: rgba(90, 156, 15, 0.1);
-  --accent-line: rgba(90, 156, 15, 0.32);
-  /* On a light background a *pale* highlight would nearly vanish -- the
-     shimmer needs to go darker/more saturated here to read as a highlight. */
-  --gradient-mid: #2f5c08;
+  /* On near-black the vibrant accent already passes as text (8.6:1), so both
+     accent tokens are the same colour here. */
+  --accent: #74c915;
+  --accent-text: #74c915;
+  --accent-hover: #8fe01e;
+  --accent-rgb: 116, 201, 21;
+  --accent-dim: rgba(116, 201, 21, 0.12);
+  --accent-line: rgba(116, 201, 21, 0.35);
 
-  --border-color: rgba(0, 0, 0, 0.08);
-  --border-hover: rgba(0, 0, 0, 0.18);
+  /* Inverse of the light case: on near-black the highlight must go PALER. */
+  --gradient-mid: #d9f5b0;
 
-  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.12);
+  --border-color: rgba(255, 255, 255, 0.09);
+  --border-hover: rgba(255, 255, 255, 0.22);
+
+  --bg-band: rgba(255, 255, 255, 0.032);
+
+  --hover-tint: rgba(255, 255, 255, 0.06);
+  --hover-tint-strong: rgba(255, 255, 255, 0.12);
+
+  --status-wip: #d6a961; /* readable amber on dark */
+  --status-wip-bg: rgba(214, 169, 97, 0.14);
+  --error: #ff6b6b;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 30px rgba(0, 0, 0, 0.3);
+  --shadow-card-hover: 0 2px 6px rgba(0, 0, 0, 0.5), 0 18px 44px rgba(0, 0, 0, 0.45);
+  --shadow-soft: 0 24px 70px rgba(0, 0, 0, 0.55);
+
+  --aurora-1: rgba(116, 201, 21, 0.14);
+  --aurora-2: rgba(59, 91, 219, 0.12);
+  --aurora-3: rgba(160, 133, 86, 0.08);
+  --noise-opacity: 0.05;
 }

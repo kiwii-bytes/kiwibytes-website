@@ -9,6 +9,8 @@ html {
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Theme swap shouldn't be a hard cut. */
+  transition: background-color 0.4s var(--ease-premium);
 }
 
 body {
@@ -16,6 +18,88 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   background-color: var(--bg-primary);
+}
+
+/* ==========================================================================
+   Ambient animated background ("aurora").
+
+   Deliberately built from radial-gradients rather than blurred elements:
+   a large `filter: blur(120px)` has to be re-rasterised and is genuinely
+   expensive on mobile, whereas a soft radial-gradient is free and looks the
+   same. Only `transform` is animated, so it stays on the compositor.
+   ========================================================================== */
+.bg-aurora {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* Nudges the layer onto its own compositor layer so the drifting blobs
+     never trigger layout/paint on the content above them. */
+  contain: strict;
+}
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+.aurora-blob--1 {
+  width: 60vw;
+  height: 60vw;
+  min-width: 480px;
+  min-height: 480px;
+  top: -18vw;
+  left: -12vw;
+  background: radial-gradient(circle at center, var(--aurora-1) 0%, transparent 68%);
+  animation: auroraDrift1 34s ease-in-out infinite alternate;
+}
+
+.aurora-blob--2 {
+  width: 55vw;
+  height: 55vw;
+  min-width: 420px;
+  min-height: 420px;
+  top: 25vh;
+  right: -16vw;
+  background: radial-gradient(circle at center, var(--aurora-2) 0%, transparent 68%);
+  animation: auroraDrift2 42s ease-in-out infinite alternate;
+}
+
+.aurora-blob--3 {
+  width: 48vw;
+  height: 48vw;
+  min-width: 380px;
+  min-height: 380px;
+  bottom: -14vw;
+  left: 22vw;
+  background: radial-gradient(circle at center, var(--aurora-3) 0%, transparent 70%);
+  animation: auroraDrift3 38s ease-in-out infinite alternate;
+}
+
+@keyframes auroraDrift1 {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(8vw, 6vh, 0) scale(1.12); }
+}
+@keyframes auroraDrift2 {
+  from { transform: translate3d(0, 0, 0) scale(1.05); }
+  to   { transform: translate3d(-7vw, -8vh, 0) scale(0.94); }
+}
+@keyframes auroraDrift3 {
+  from { transform: translate3d(0, 0, 0) scale(0.96); }
+  to   { transform: translate3d(6vw, -5vh, 0) scale(1.1); }
+}
+
+/* Fine grain over the top. Large flat gradients band badly (especially on
+   light backgrounds); a touch of noise hides it and adds texture. */
+.bg-noise {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: var(--noise-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 a {

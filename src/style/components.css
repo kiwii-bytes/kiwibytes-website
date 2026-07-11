@@ -17,9 +17,13 @@
   background-color: rgba(128, 128, 128, 0.12);
 }
 
-.theme-toggle .icon-moon { display: none; }
-:root[data-theme='light'] .theme-toggle .icon-sun { display: none; }
-:root[data-theme='light'] .theme-toggle .icon-moon { display: block; }
+/* Base is now the LIGHT theme, so show the moon ("switch to dark"); dark flips
+   it. Keyed off [data-theme='dark'] rather than 'light' so the icon is still
+   correct if JS never runs and no data-theme attribute is ever stamped. */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+:root[data-theme='dark'] .theme-toggle .icon-sun { display: block; }
+:root[data-theme='dark'] .theme-toggle .icon-moon { display: none; }
 
 .mobile-nav .theme-toggle {
   width: auto;
@@ -44,7 +48,7 @@ h1, h2, h3, h4, .logo, .btn, .nav-link {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--accent);
+  color: var(--accent-text);
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
@@ -126,7 +130,7 @@ h1, h2, h3, h4, .logo, .btn, .nav-link {
 .nav-link:hover,
 .nav-link.active {
   color: var(--text-primary);
-  background-color: rgba(255, 255, 255, 0.06);
+  background-color: var(--hover-tint);
 }
 
 /* Buttons */
@@ -240,7 +244,6 @@ h1, h2, h3, h4, .logo, .btn, .nav-link {
 .footer {
   position: relative;
   z-index: 1;
-  background-color: var(--bg-primary);
   border-top: 1px solid var(--border-color);
   padding: 5rem 0 2rem;
 }
@@ -281,7 +284,7 @@ h1, h2, h3, h4, .logo, .btn, .nav-link {
   transition: color 0.25s var(--ease-premium);
 }
 
-.footer-link:hover { color: var(--accent); }
+.footer-link:hover { color: var(--accent-text); }
 
 .footer-bottom {
   border-top: 1px solid var(--border-color);

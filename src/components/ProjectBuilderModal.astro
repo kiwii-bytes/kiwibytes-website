@@ -128,6 +128,21 @@
             <label for="client-email">Email address</label>
             <span class="error-text">Please enter a valid email.</span>
           </div>
+
+          <!-- Optional on purpose: a required free-text box right at the point
+               of conversion is a classic drop-off point. Most motivated leads
+               fill it in anyway. -->
+          <div class="form-field full-width">
+            <textarea id="client-notes" rows="4" maxlength="2000" placeholder=" "></textarea>
+            <label for="client-notes">Tell us about your project (optional)</label>
+            <!-- Each side must be a single element: .field-hint is a flex row
+                 with space-between, so bare text nodes around the counter would
+                 each become their own flex item and get pushed apart. -->
+            <span class="field-hint">
+              <span>What are you building, what's broken, or what does success look like?</span>
+              <span class="field-count"><span id="notes-count">0</span>/2000</span>
+            </span>
+          </div>
         </div>
         <span class="validation-message" id="submit-error">Couldn't send your request &mdash; please try again or email us directly.</span>
         <div class="modal-actions">

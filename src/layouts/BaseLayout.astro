@@ -49,17 +49,20 @@ const { title, description, schema, ogType, noindex } = Astro.props;
     />
 
     <script is:inline>
-      // Set the theme before first paint so a returning dark-mode visitor
-      // never sees a white flash. Must be inline + blocking to beat the render.
+      // Stamp the theme before first paint so a returning dark-mode visitor
+      // never sees a flash of light. Must be inline + blocking to beat render.
+      //
+      // The 'light' default here MUST match DEFAULT_THEME in src/lib/theme.js.
+      // If they diverge, every visitor gets a visible theme flash on load.
       (() => {
         try {
           const stored = localStorage.getItem('kiwibytes-theme');
           document.documentElement.setAttribute(
             'data-theme',
-            stored === 'light' || stored === 'dark' ? stored : 'dark'
+            stored === 'light' || stored === 'dark' ? stored : 'light'
           );
         } catch {
-          document.documentElement.setAttribute('data-theme', 'dark');
+          document.documentElement.setAttribute('data-theme', 'light');
         }
       })();
     </script>
@@ -67,6 +70,15 @@ const { title, description, schema, ogType, noindex } = Astro.props;
 
   <body>
     <a href="#main" class="skip-link">Skip to content</a>
+
+    <!-- Ambient animated background. Purely decorative, so hidden from AT.
+         Sits behind .page-content (z-index 1) and never intercepts clicks. -->
+    <div class="bg-aurora" aria-hidden="true">
+      <div class="aurora-blob aurora-blob--1"></div>
+      <div class="aurora-blob aurora-blob--2"></div>
+      <div class="aurora-blob aurora-blob--3"></div>
+    </div>
+    <div class="bg-noise" aria-hidden="true"></div>
 
     <div class="page-content">
       <Header />
