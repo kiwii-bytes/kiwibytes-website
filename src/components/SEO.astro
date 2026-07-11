@@ -1,0 +1,57 @@
+---
+import { SITE_NAME, SITE_URL, SITE_DESCRIPTION, withBase } from '../consts.js';
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Pass an array of JSON-LD objects to embed for this page. */
+  schema?: Record<string, any>[];
+  ogType?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = SITE_DESCRIPTION,
+  schema = [],
+  ogType = 'website',
+  noindex = false,
+} = Astro.props;
+
+// Astro.site + base are already baked into Astro.url, so this is the real
+// canonical for whatever domain the site is deployed on.
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(withBase('og-image.png'), SITE_URL).href;
+
+// Homepage keeps the brand-first title; inner pages get "Page — Kiwi Bytes".
+const fullTitle = title.includes(SITE_NAME) ? title : `${title} — ${SITE_NAME}`;
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Open Graph: without these, links shared to WhatsApp/LinkedIn/Slack render
+     as a bare URL with no preview. -->
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="en_IN" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+
+{
+  schema.map((item) => (
+    <script type="application/ld+json" set:html={JSON.stringify(item)} />
+  ))
+}

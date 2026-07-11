@@ -1,0 +1,269 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import FAQ from '../components/FAQ.astro';
+import Newsletter from '../components/Newsletter.astro';
+import Testimonials from '../components/Testimonials.astro';
+import CTA from '../components/CTA.astro';
+import { withBase, SITE_NAME } from '../consts.js';
+import {
+  HERO_STATS,
+  STATS_DISCLAIMER,
+  SERVICES,
+  CAPABILITIES,
+  PRODUCTS,
+  PROCESS,
+  FAQS,
+} from '../data/site-content.js';
+import {
+  organizationSchema,
+  websiteSchema,
+  faqSchema,
+  serviceSchema,
+} from '../lib/schema.js';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 3);
+
+const schema = [
+  organizationSchema(),
+  websiteSchema(),
+  serviceSchema(SERVICES.map((s) => ({ name: s.name, description: s.description }))),
+  faqSchema(FAQS),
+];
+
+const title = `${SITE_NAME} — Engineering Studio for Web, AI & Commerce`;
+const description =
+  'Kiwi Bytes is a software engineering studio in Mumbai building web platforms, production AI agents, workflow automation and Shopify & marketplace commerce systems.';
+
+const dateFmt = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+---
+
+<BaseLayout title={title} description={description} schema={schema}>
+  <!-- ================= HERO ================= -->
+  <section id="hero-section" class="hero">
+    <div class="container hero-container">
+      <span class="eyebrow hero-tag">Available for new engagements</span>
+
+      {/* The explicit {' '} matters: these are block-level spans, so without it
+          the h1's text content concatenates to "We engineerdigital momentum." —
+          which is what a screen reader announces and a crawler indexes. */}
+      <h1 class="hero-title">
+        <span class="hero-line">We engineer</span>{' '}
+        <span class="hero-line gradient-text">digital momentum.</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Web platforms, AI agents, and commerce systems — built by engineers who've shipped
+        real production scale, not just prototypes.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary trigger-project-builder" type="button">
+          <span>Launch Project Builder</span>
+          <Icon name="arrow" size={16} />
+        </button>
+        <a href={withBase('/services')} class="btn btn-secondary"><span>Explore Services</span></a>
+      </div>
+
+      <div class="hero-stats">
+        {
+          HERO_STATS.map((stat, i) => (
+            <>
+              {i > 0 && <div class="stat-divider" />}
+              <div class="stat-item">
+                <span class="stat-num">{stat.value}</span>
+                <span class="stat-label">{stat.label}</span>
+              </div>
+            </>
+          ))
+        }
+      </div>
+      <p class="stats-disclaimer">{STATS_DISCLAIMER}</p>
+    </div>
+
+    <div class="scroll-cue">
+      <span>Scroll</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+    </div>
+  </section>
+
+  <!-- ================= MARQUEE ================= -->
+  <div class="marquee-container" aria-hidden="true">
+    <div class="marquee-content">
+      {
+        Array.from({ length: 2 }).map(() => (
+          <>
+            <span>WEB ENGINEERING <i class="dot" /></span>
+            <span>AI &amp; LLM INTEGRATIONS <i class="dot" /></span>
+            <span>AUTONOMOUS AGENTS <i class="dot" /></span>
+            <span>CLOUD &amp; DEVOPS <i class="dot" /></span>
+            <span>SHOPIFY &amp; COMMERCE <i class="dot" /></span>
+          </>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- ================= SERVICES ================= -->
+  <section id="services-section" class="services">
+    <div class="container">
+      <div class="section-header-row">
+        <div class="section-header reveal-on-scroll">
+          <span class="eyebrow">Core Capabilities</span>
+          <h2 class="section-title">What we build.</h2>
+        </div>
+        <a href={withBase('/services')} class="section-link reveal-on-scroll">
+          All services <Icon name="arrow" size={16} />
+        </a>
+      </div>
+
+      <div class="services-grid">
+        {
+          SERVICES.map((service) => (
+            <article class="service-card reveal-on-scroll">
+              <div class="service-icon"><Icon name={service.icon} /></div>
+              <span class="service-num">{service.num}</span>
+              <h3 class="service-title">{service.name}</h3>
+              <p class="service-desc">{service.short}</p>
+              <ul class="service-bullets">
+                {service.bullets.map((b) => <li>{b}</li>)}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CAPABILITIES / TRACK RECORD ================= -->
+  <section id="capabilities" class="capabilities">
+    <div class="container">
+      <div class="section-header-row">
+        <div class="section-header reveal-on-scroll">
+          <span class="eyebrow">Track record</span>
+          <h2 class="section-title">What our engineers have shipped.</h2>
+        </div>
+        <a href={withBase('/work')} class="section-link reveal-on-scroll">
+          See the detail <Icon name="arrow" size={16} />
+        </a>
+      </div>
+
+      <div class="capabilities-grid">
+        {
+          CAPABILITIES.map((cap) => (
+            <div class="capability reveal-on-scroll">
+              <span class="capability-stat">{cap.stat}</span>
+              <h3 class="capability-title">{cap.title}</h3>
+              <p class="capability-body">{cap.body}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="stats-disclaimer">
+        These are our engineers' credentials from years of production work — not
+        Kiwi Bytes client outcomes. Kiwi Bytes is a new studio taking on its first
+        engagements, and we'd rather tell you that than dress it up.
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= PRODUCTS ================= -->
+  <section id="products-section" class="products">
+    <div class="container">
+      <div class="section-header-row">
+        <div class="section-header reveal-on-scroll">
+          <span class="eyebrow">Proprietary Software</span>
+          <h2 class="section-title">Products we're building.</h2>
+        </div>
+        <a href={withBase('/products')} class="section-link reveal-on-scroll">
+          All products <Icon name="arrow" size={16} />
+        </a>
+      </div>
+
+      <div class="products-grid">
+        {
+          PRODUCTS.map((product) => (
+            <article class="product-card reveal-on-scroll">
+              <div class="product-icon"><Icon name={product.icon} size={26} /></div>
+              <span class={`status-pill ${product.status === 'live' ? 'is-live' : 'is-wip'}`}>
+                {product.statusLabel}
+              </span>
+              <h3 class="product-title">{product.name}</h3>
+              <p class="product-subtitle">{product.tagline}</p>
+              <p class="product-desc">{product.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PROCESS ================= -->
+  <section id="process-section" class="process">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="eyebrow">Our Roadmap</span>
+        <h2 class="section-title">How we build.</h2>
+      </div>
+
+      <div class="process-grid">
+        {
+          PROCESS.map((step) => (
+            <div class="process-step reveal-on-scroll">
+              <span class="process-num">{step.num}</span>
+              <h3 class="process-title">{step.title}</h3>
+              <p class="process-desc">{step.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Renders only when real client testimonials exist. See the component. -->
+  <Testimonials />
+
+  <!-- ================= BLOG TEASER ================= -->
+  {
+    posts.length > 0 && (
+      <section class="content-section" id="blog-teaser">
+        <div class="container">
+          <div class="section-header-row">
+            <div class="section-header reveal-on-scroll">
+              <span class="eyebrow">Writing</span>
+              <h2 class="section-title">Notes from the build.</h2>
+            </div>
+            <a href={withBase('/blog')} class="section-link reveal-on-scroll">
+              All posts <Icon name="arrow" size={16} />
+            </a>
+          </div>
+
+          <div class="blog-grid">
+            {posts.map((post) => (
+              <a href={withBase(`/blog/${post.id}`)} class="blog-card reveal-on-scroll">
+                <div class="blog-card-meta">
+                  <time datetime={post.data.publishDate.toISOString()}>
+                    {dateFmt.format(post.data.publishDate)}
+                  </time>
+                </div>
+                <h3 class="blog-card-title">{post.data.title}</h3>
+                <p class="blog-card-desc">{post.data.description}</p>
+                <span class="blog-card-cta">
+                  Read <Icon name="arrow" size={15} />
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <Newsletter />
+  <FAQ faqs={FAQS} />
+  <CTA />
+</BaseLayout>

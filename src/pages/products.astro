@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CTA from '../components/CTA.astro';
+import Icon from '../components/Icon.astro';
+import { PRODUCTS } from '../data/site-content.js';
+import { organizationSchema, breadcrumbSchema } from '../lib/schema.js';
+import { WEBTARSUS_REPO } from '../consts.js';
+
+// Deliberately NO Product schema with offers/ratings here: two of the three are
+// not shipped, and marking up unreleased software as an available product with
+// invented metrics is both a structured-data violation and a lie.
+const schema = [
+  organizationSchema(),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Products', path: '/products' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Products"
+  description="WebTarsus is our open-source browser automation agent, built with FastAPI, WebSockets and LangGraph. Reviewify and Nourish are currently in development."
+  schema={schema}
+>
+  <PageHeader
+    eyebrow="Proprietary software"
+    title="Products we're building."
+    lead="One is live and open source — you can read the code today. Two are in active development. We've labelled each one honestly, because a product page that overstates what exists is the fastest way to lose a technical buyer."
+  />
+
+  <section class="content-section">
+    <div class="container">
+      <div class="products-grid">
+        {
+          PRODUCTS.map((product) => (
+            <article class="product-card reveal-on-scroll">
+              <div class="product-icon"><Icon name={product.icon} size={26} /></div>
+              <span class={`status-pill ${product.status === 'live' ? 'is-live' : 'is-wip'}`}>
+                {product.statusLabel}
+              </span>
+              <h2 class="product-title">{product.name}</h2>
+              <p class="product-subtitle">{product.tagline}</p>
+              <p class="product-desc">{product.detail}</p>
+              {product.status === 'live' && (
+                <a href={WEBTARSUS_REPO} class="blog-card-cta" rel="noopener">
+                  View the source <Icon name="arrow" size={15} />
+                </a>
+              )}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <div class="prose reveal-on-scroll">
+        <h2>Why we label things "in development"</h2>
+        <p>
+          It would be easy to put a confident-looking accuracy percentage next to Nourish, or
+          a "100% automated" badge next to Reviewify. Plenty of sites do.
+        </p>
+        <p>
+          We won't, because those numbers wouldn't mean anything yet. When Nourish has been
+          evaluated on a real held-out dataset, we'll publish the number we actually measured
+          — including if it's less impressive than we'd like. Until then, saying nothing is
+          more honest than saying something unverifiable.
+        </p>
+        <p>
+          <strong>WebTarsus</strong> is different: it exists, it's open source, and the code
+          is public. That's the standard of proof we want to hold the rest to.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    title="Want something like this built for you?"
+    desc="The same engineers building these products are the ones who'd build yours."
+  />
+</BaseLayout>

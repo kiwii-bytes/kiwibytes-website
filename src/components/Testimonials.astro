@@ -1,0 +1,62 @@
+---
+// ---------------------------------------------------------------------------
+// NOT RENDERED YET — AND THAT IS DELIBERATE.
+//
+// Kiwi Bytes has no clients yet, so there are no real testimonials. This
+// component is built and styled so that the day a real client gives a real
+// quote, you fill in TESTIMONIALS below and flip SHOW_TESTIMONIALS to true in
+// src/consts.js. That is the entire change.
+//
+// DO NOT populate this with invented quotes. Fabricated endorsements are
+// illegal (FTC in the US; Consumer Protection Act / ASCI in India), and a
+// buyer who catches one will never trust anything else on the page.
+//
+// Each entry should be verifiable: a real person, a real company, ideally with
+// a LinkedIn URL so a prospect can check it.
+// ---------------------------------------------------------------------------
+import { SHOW_TESTIMONIALS } from '../consts.js';
+
+const TESTIMONIALS: {
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
+  profileUrl?: string;
+}[] = [];
+
+const shouldRender = SHOW_TESTIMONIALS && TESTIMONIALS.length > 0;
+---
+
+{
+  shouldRender && (
+    <section class="testimonials-section">
+      <div class="container">
+        <div class="section-header reveal-on-scroll">
+          <span class="eyebrow">Clients</span>
+          <h2 class="section-title">What they say.</h2>
+        </div>
+        <div class="testimonials-grid">
+          {TESTIMONIALS.map((t) => (
+            <figure class="testimonial-card reveal-on-scroll">
+              <blockquote class="testimonial-quote">“{t.quote}”</blockquote>
+              <figcaption class="testimonial-meta">
+                <span class="testimonial-name">
+                  {t.profileUrl ? (
+                    <a href={t.profileUrl} rel="noopener">
+                      {t.name}
+                    </a>
+                  ) : (
+                    t.name
+                  )}
+                </span>
+                <span class="testimonial-role">
+                  {t.role}, {t.company}
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

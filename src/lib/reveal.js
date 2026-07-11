@@ -1,60 +1,59 @@
-import { gsap, ScrollTrigger, prefersReducedMotion } from './lenis-gsap.js';
+import { gsap, prefersReducedMotion } from './lenis-gsap.js';
 
 export function initRevealSystem() {
-  const els = gsap.utils.toArray('.reveal-on-scroll');
+  const els = Array.from(document.querySelectorAll('.reveal-on-scroll'));
   if (!els.length) return;
 
-  if (prefersReducedMotion) {
-    els.forEach((el) => el.classList.add('revealed'));
-    return;
-  }
+  // Reduced motion: leave everything visible, do nothing at all.
+  if (prefersReducedMotion) return;
 
-  ScrollTrigger.batch(els, {
-    start: 'top 88%',
-    onEnter: (batch) => {
-      gsap.to(batch, {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-        stagger: 0.1,
+  // The hidden state is applied from JS, never from CSS. That's deliberate: if
+  // this script ever fails to run, a visitor (or a crawler) still sees all the
+  // content rather than a blank page.
+  gsap.set(els, { opacity: 0, y: 40 });
+
+  const show = (el, delay = 0) =>
+    gsap.to(el, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay });
+
+  // IntersectionObserver rather than a scroll-driven trigger.
+  //
+  // Why: scroll-driven reveals only fire when a scroll *event* fires. A
+  // programmatic jump -- an anchor link like /services#web, a restored scroll
+  // position on back/forward, or scrollIntoView() -- moves the page without
+  // producing the scroll stream Lenis/ScrollTrigger listen to, so elements
+  // that land in view were left permanently at opacity 0. IntersectionObserver
+  // reports intersection regardless of *how* the page got there, and also
+  // fires immediately on observe() for anything already in view.
+  const io = new IntersectionObserver(
+    (entries) => {
+      const entering = entries.filter((e) => e.isIntersecting);
+      entering.forEach((entry, i) => {
+        show(entry.target, i * 0.08); // stagger items that appear together
+        io.unobserve(entry.target);
       });
     },
-    once: true,
-  });
+    { rootMargin: '0px 0px -8% 0px' }
+  );
 
-  gsap.set(els, { opacity: 0, y: 40 });
+  els.forEach((el) => {
+    // Already scrolled past (e.g. we deep-linked below it)? Just show it —
+    // don't make the user scroll back up to un-hide content.
+    if (el.getBoundingClientRect().bottom < 0) {
+      gsap.set(el, { opacity: 1, y: 0 });
+    } else {
+      io.observe(el);
+    }
+  });
 }
 
-export function initNavScrollSpy() {
+// Header background state. Uses the native scroll event rather than a
+// ScrollTrigger, for the same robustness reason as above: Lenis scrolls the
+// real window, so native scroll fires reliably, including after a jump.
+export function initHeaderScrollState() {
   const header = document.querySelector('.header');
-  const navLinks = document.querySelectorAll('.nav-link[data-nav-target]');
-  const sections = Array.from(navLinks)
-    .map((link) => ({
-      link,
-      el: document.getElementById(link.dataset.navTarget),
-    }))
-    .filter((entry) => entry.el);
+  if (!header) return;
 
-  ScrollTrigger.create({
-    start: 0,
-    end: 'max',
-    onUpdate: (self) => {
-      header.classList.toggle('scrolled', self.scroll() > 20);
-    },
-  });
-
-  sections.forEach(({ link, el }) => {
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top center',
-      end: 'bottom center',
-      onToggle: (self) => {
-        if (self.isActive) {
-          navLinks.forEach((l) => l.classList.remove('active'));
-          link.classList.add('active');
-        }
-      },
-    });
-  });
+  const update = () => header.classList.toggle('scrolled', window.scrollY > 20);
+  update(); // correct on first paint, including when landing mid-page
+  window.addEventListener('scroll', update, { passive: true });
 }

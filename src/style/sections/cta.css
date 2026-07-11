@@ -25,6 +25,20 @@
   margin-bottom: 2.5rem;
 }
 
+.cta-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cta-title {
+  /* Tight line-height clips descenders (g/y/p) without a little breathing room. */
+  padding-bottom: 0.08em;
+}
+
 @media (max-width: 768px) {
   .cta { padding: 5.5rem 0; }
+  .cta-actions { flex-direction: column; align-items: stretch; }
 }

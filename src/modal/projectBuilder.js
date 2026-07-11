@@ -13,6 +13,8 @@ const SERVICE_LABELS = {
 
 export function initProjectBuilder() {
   const modal = document.getElementById('project-builder-modal');
+  if (!modal) return;
+
   const triggers = document.querySelectorAll('.trigger-project-builder');
   const closeBtn = modal.querySelector('.modal-close');
   const closeSuccessBtn = modal.querySelector('.close-modal-btn');

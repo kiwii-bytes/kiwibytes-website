@@ -1,0 +1,35 @@
+---
+// Honest copy: EmailJS delivers the address to our inbox; it is not a
+// mailing-list product yet. So we don't promise an automated welcome email or
+// a fixed publishing schedule we can't currently keep.
+---
+
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-box reveal-on-scroll">
+      <div class="newsletter-copy">
+        <span class="eyebrow">Newsletter</span>
+        <h2 class="newsletter-title">Notes from the build.</h2>
+        <p class="newsletter-desc">
+          Occasional, genuinely technical write-ups on shipping AI agents, automating
+          operations, and scaling commerce systems. No spam, no filler — unsubscribe anytime.
+        </p>
+      </div>
+
+      <form class="newsletter-form" data-newsletter-form novalidate>
+        <label class="visually-hidden" for="newsletter-email">Email address</label>
+        <input
+          type="email"
+          id="newsletter-email"
+          name="email"
+          class="newsletter-input"
+          placeholder="you@company.com"
+          autocomplete="email"
+          required
+        />
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+        <p class="newsletter-status" data-newsletter-status role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
