@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { withBase } from '../consts.js';
+---
+
+<BaseLayout title="Page not found" description="That page doesn't exist." noindex={true}>
+  <section class="page-header">
+    <div class="container page-header-inner">
+      <span class="eyebrow">404</span>
+      <h1 class="page-title">That page doesn't exist.</h1>
+      <p class="page-lead">
+        The link may be broken, or the page may have moved. Here's the way back.
+      </p>
+      <div class="hero-actions" style="margin-top: 2.5rem;">
+        <a href={withBase('/')} class="btn btn-primary">
+          <span>Back to home</span>
+          <Icon name="arrow" size={16} />
+        </a>
+        <a href={withBase('/blog')} class="btn btn-secondary"><span>Read the blog</span></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

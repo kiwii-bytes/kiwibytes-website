@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import FAQ from '../components/FAQ.astro';
+import Icon from '../components/Icon.astro';
+import { FAQS } from '../data/site-content.js';
+import { organizationSchema, faqSchema, breadcrumbSchema } from '../lib/schema.js';
+import { CONTACT_EMAIL, LOCATION, SOCIALS } from '../consts.js';
+
+const contactFaqs = FAQS.filter((f) =>
+  [
+    'How much does a project cost?',
+    'How long does a typical project take?',
+    'Do you work with early-stage startups?',
+    'Where are you based, and do you work remotely?',
+  ].includes(f.q)
+);
+
+const schema = [
+  organizationSchema(),
+  faqSchema(contactFaqs),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Contact', path: '/contact' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Contact"
+  description={`Get in touch with Kiwi Bytes. Email ${CONTACT_EMAIL}, or use the Project Builder for a scoped estimate within one business day. Based in ${LOCATION}, working remotely worldwide.`}
+  schema={schema}
+>
+  <PageHeader
+    eyebrow="Contact"
+    title="Tell us what you're building."
+    lead="Send us the problem you're trying to solve — not a spec. We'll come back with a scoped estimate, an honest timeline, and whether we think we're actually the right people for it."
+  />
+
+  <section class="content-section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="reveal-on-scroll">
+          <div class="contact-methods">
+            <div>
+              <span class="contact-method-label">Email</span>
+              <p class="contact-method-value">
+                <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+              </p>
+            </div>
+
+            <div>
+              <span class="contact-method-label">Based in</span>
+              <p class="contact-method-value">{LOCATION}</p>
+            </div>
+
+            <div>
+              <span class="contact-method-label">Code</span>
+              <p class="contact-method-value">
+                <a href={SOCIALS.github} rel="noopener">GitHub</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="contact-promise" style="margin-top: 2rem;">
+            <strong>What happens next:</strong> we reply to every brief within 1 business day
+            — even if the answer is "this isn't a good fit for us". If it is a fit, you'll get
+            a scoped estimate and a written timeline before anyone asks you for money.
+          </div>
+        </div>
+
+        <div class="reveal-on-scroll">
+          <div class="prose">
+            <h2>The fastest route</h2>
+            <p>
+              The Project Builder walks you through what you need, your budget range, and how
+              to reach you. It takes about a minute and gives us enough to scope properly.
+            </p>
+          </div>
+          <button class="btn btn-primary trigger-project-builder" type="button" style="margin-top: 1.5rem;">
+            <span>Launch Project Builder</span>
+            <Icon name="arrow" size={16} />
+          </button>
+
+          <div class="prose" style="margin-top: 2.5rem;">
+            <p>
+              Prefer plain email? That works just as well —
+              <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>. Tell us what's broken
+              or what you want to build, and roughly what you can spend.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <FAQ faqs={contactFaqs} title="Before you write to us." />
+</BaseLayout>

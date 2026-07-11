@@ -1,0 +1,38 @@
+# Kiwi Bytes — https://kiwii-bytes.github.io/kiwibytes-website/
+
+User-agent: *
+Allow: /
+
+# AI / answer-engine crawlers are explicitly allowed.
+# This is a deliberate choice: to be *cited* by ChatGPT, Perplexity, Claude and
+# Google's AI Overviews, their crawlers must be able to read the site. Blocking
+# them protects nothing here (everything on this site is public marketing copy)
+# and would remove us from exactly the surfaces we want to appear on.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://kiwii-bytes.github.io/kiwibytes-website/sitemap-index.xml

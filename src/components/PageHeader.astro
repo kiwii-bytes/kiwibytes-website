@@ -1,0 +1,18 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  /** Lead paragraph. Written as a direct, self-contained definition — this is
+      the sentence answer engines and LLMs are most likely to lift. */
+  lead: string;
+}
+const { eyebrow, title, lead } = Astro.props;
+---
+
+<section class="page-header">
+  <div class="container page-header-inner">
+    <span class="eyebrow">{eyebrow}</span>
+    <h1 class="page-title">{title}</h1>
+    <p class="page-lead">{lead}</p>
+  </div>
+</section>

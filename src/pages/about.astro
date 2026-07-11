@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import { PROCESS, FAQS } from '../data/site-content.js';
+import { organizationSchema, faqSchema, breadcrumbSchema } from '../lib/schema.js';
+import { LOCATION } from '../consts.js';
+
+const aboutFaqs = FAQS.filter((f) =>
+  [
+    'What does Kiwi Bytes do?',
+    'Have you worked with clients before?',
+    'Do you work with early-stage startups?',
+    'Where are you based, and do you work remotely?',
+  ].includes(f.q)
+);
+
+const schema = [
+  organizationSchema(),
+  faqSchema(aboutFaqs),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="About"
+  description={`Kiwi Bytes is a software engineering studio based in ${LOCATION}, building web platforms, AI agents, automation and commerce systems. We are a new studio, and we are upfront about it.`}
+  schema={schema}
+>
+  <PageHeader
+    eyebrow="Who we are"
+    title="A small studio of production engineers."
+    lead={`Kiwi Bytes is a software engineering studio based in ${LOCATION}. We build web platforms, AI agents, automation systems and commerce infrastructure — and we work remotely with clients worldwide.`}
+  />
+
+  <section class="content-section">
+    <div class="container">
+      <div class="prose reveal-on-scroll">
+        <h2>The short, honest version</h2>
+        <p>
+          We're a team of engineers who spent years building production systems — e-commerce
+          platforms, automation that removed real operational workload, and AI systems that
+          serve real users — and decided to do it as our own studio.
+        </p>
+        <p>
+          Kiwi Bytes is <strong>new</strong>. We're taking on our first client engagements
+          now. You could read that as a risk, and it's fair to. Here's the other side of it:
+          you get senior engineers doing the work directly, not a junior team behind an
+          account manager, and you get a studio that badly wants your project to be the one
+          it points at.
+        </p>
+        <p>
+          We'd rather tell you that plainly than pad this page with stock photos and invented
+          five-star reviews.
+        </p>
+
+        <h2>What we actually believe</h2>
+
+        <h3>Say the real number, or say nothing</h3>
+        <p>
+          We don't publish metrics we haven't measured. Our in-development products carry no
+          performance claims, because they haven't earned any yet. If we tell you something
+          improved by 40%, we can show you how we measured it.
+        </p>
+
+        <h3>The boring parts are the product</h3>
+        <p>
+          Anyone can build the happy path. What determines whether a system survives is the
+          unglamorous half — idempotency, retries, reconciliation, monitoring, the alert that
+          fires when a job silently stops running. That's where we spend our attention.
+        </p>
+
+        <h3>Scope honestly, even when it costs us</h3>
+        <p>
+          If your budget doesn't fit what you're asking for, we'll tell you before we start
+          rather than discover it together halfway through. If you don't need the thing you
+          asked for, we'll say that too — it's cheaper for both of us than building it.
+        </p>
+
+        <h3>You should be able to maintain it</h3>
+        <p>
+          Handover isn't a formality. Code you can't maintain without us isn't an asset,
+          it's a subscription you didn't agree to.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="process">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="eyebrow">Our process</span>
+        <h2 class="section-title">How we build.</h2>
+      </div>
+
+      <div class="process-grid">
+        {
+          PROCESS.map((step) => (
+            <div class="process-step reveal-on-scroll">
+              <span class="process-num">{step.num}</span>
+              <h3 class="process-title">{step.title}</h3>
+              <p class="process-desc">{step.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <div class="prose reveal-on-scroll">
+        <h2>Why the team isn't pictured here</h2>
+        <p>
+          You'll notice we don't list individual names and headshots. That's a deliberate
+          choice for now, not an accident — several of our engineers have existing
+          professional commitments, and we're respecting those while the studio gets going.
+        </p>
+        <p>
+          We know that costs us something in trust, so we're trying to earn it back in ways
+          you can actually check: our
+          <a href="https://github.com/Aqib-Ansari" rel="noopener">open-source work is public</a>,
+          our technical writing is specific enough to judge, and our pricing and process are
+          on this site rather than behind a "contact us for a quote".
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <FAQ faqs={aboutFaqs} title="Questions you're probably asking." />
+  <CTA />
+</BaseLayout>

@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import CTA from '../components/CTA.astro';
+import { CAPABILITIES } from '../data/site-content.js';
+import { organizationSchema, breadcrumbSchema } from '../lib/schema.js';
+
+const schema = [
+  organizationSchema(),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Work', path: '/work' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Work"
+  description="Kiwi Bytes is a new studio. Our engineers, however, bring years of production experience: 20+ Shopify stores shipped, 80+ hours/day of manual work automated, and 10+ marketplace and payment APIs integrated."
+  schema={schema}
+>
+  <PageHeader
+    eyebrow="Track record"
+    title="What our engineers have shipped."
+    lead="Kiwi Bytes is a new studio taking on its first client engagements. Rather than dress that up, here is the honest thing: the engineering track record our team brings with them from years of production e-commerce, automation and AI work."
+  />
+
+  <!-- The single most important section on this page. A buyer who realises we
+       blurred this line would stop trusting everything else we say. -->
+  <section class="content-section">
+    <div class="container">
+      <div class="prose reveal-on-scroll">
+        <h2>Being straight with you</h2>
+        <p>
+          Most agency websites open with a wall of client logos and five-star quotes. We
+          don't have those yet, because we haven't earned them yet — Kiwi Bytes is new.
+        </p>
+        <p>
+          What we <strong>do</strong> have is a team of engineers who have spent years
+          building and running production systems: e-commerce platforms handling real order
+          volume, automation that removed real operational headcount, and AI systems that
+          serve real users rather than sit in a demo.
+        </p>
+        <p>
+          Everything below is <strong>our engineers' credentials</strong> — skills and
+          experience they bring to your project. None of it is presented as a Kiwi Bytes
+          client outcome, because none of it is one. When we have client results, we'll
+          publish those separately, with the client's name and permission.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="capabilities">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="eyebrow">Capabilities</span>
+        <h2 class="section-title">Proven in production.</h2>
+      </div>
+
+      <div class="capabilities-grid">
+        {
+          CAPABILITIES.map((cap) => (
+            <div class="capability reveal-on-scroll">
+              <span class="capability-stat">{cap.stat}</span>
+              <h3 class="capability-title">{cap.title}</h3>
+              <p class="capability-body">{cap.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <div class="prose reveal-on-scroll">
+        <h2>What that experience actually covers</h2>
+
+        <h3>E-commerce and marketplace systems</h3>
+        <p>
+          Shopify storefronts built from scratch — custom themes, headless architectures and
+          custom apps — plus the machinery behind them: order ingestion, inventory sync,
+          fulfilment tracking, refund processing and price updates. Integrations across
+          Amazon SP-API, eBay, Walmart, Mirakl, AbeBooks and PayPal, keeping stock and orders
+          consistent across channels.
+        </p>
+
+        <h3>Automation and RPA</h3>
+        <p>
+          Replacing repetitive operations work with n8n workflows, Python RPA and scheduled
+          agents: financial reconciliation, logistics status updates, bulk refunds, listing
+          publication and data entry. Cumulatively this has removed 80+ hours of manual work
+          per day — the kind of work that scales linearly with revenue if you let it.
+        </p>
+
+        <h3>AI and LLM systems</h3>
+        <p>
+          Production RAG pipelines over relational data, multi-agent frameworks built on
+          LangChain and LangGraph, and text-to-SQL agents that let non-technical staff query
+          multi-table schemas in plain English. Plus deep-learning work — a delivery-time
+          prediction model trained on real logistics data.
+        </p>
+
+        <h3>Cloud and infrastructure</h3>
+        <p>
+          AWS architecture using S3, Lambda, CloudFront, EC2 and CloudWatch, wired together
+          with CI/CD, security hardening (CSRF protection, CAPTCHA, secure payment flows)
+          and the monitoring needed to know something broke before customers tell you.
+        </p>
+
+        <h2>The one thing you can verify right now</h2>
+        <p>
+          Claims are easy. Code isn't. <strong>WebTarsus</strong> — our open-source browser
+          automation agent, built with FastAPI, WebSockets, a Manifest V3 Chrome extension
+          and LangGraph — is public. You can read it, run it, and judge the engineering for
+          yourself. That's a more useful signal than any testimonial we could show you.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <CTA
+    title="Want to be the first case study?"
+    desc="We're a new studio, which means you get senior engineers who are genuinely invested in making your project the one we point at."
+  />
+</BaseLayout>

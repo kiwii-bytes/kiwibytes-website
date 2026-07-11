@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import Icon from '../components/Icon.astro';
+import { SERVICES, FAQS } from '../data/site-content.js';
+import { organizationSchema, serviceSchema, faqSchema, breadcrumbSchema } from '../lib/schema.js';
+
+// Service-specific slice of the FAQ, so the schema on this page matches what's
+// actually rendered on it (mismatched FAQ markup is a structured-data error).
+const serviceFaqs = FAQS.filter((f) =>
+  [
+    'How much does a project cost?',
+    'How long does a typical project take?',
+    'Can you automate work we currently do manually?',
+    'What is RAG, and do I actually need it?',
+  ].includes(f.q)
+);
+
+const schema = [
+  organizationSchema(),
+  serviceSchema(SERVICES.map((s) => ({ name: s.name, description: s.description }))),
+  faqSchema(serviceFaqs),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Services', path: '/services' },
+  ]),
+];
+---
+
+<BaseLayout
+  title="Services"
+  description="Kiwi Bytes builds custom web platforms, cross-platform apps, production AI and LLM/RAG integrations, autonomous agents, AWS cloud infrastructure, and Shopify & marketplace commerce systems."
+  schema={schema}
+>
+  <PageHeader
+    eyebrow="Services"
+    title="What we build."
+    lead="Kiwi Bytes builds six things: web platforms, cross-platform apps, AI and LLM integrations, autonomous agents, cloud infrastructure, and commerce systems. Everything below is work our engineers have genuinely done in production."
+  />
+
+  <section class="content-section">
+    <div class="container">
+      <div class="services-grid">
+        {
+          SERVICES.map((service) => (
+            <article class="service-card reveal-on-scroll" id={service.id}>
+              <div class="service-icon"><Icon name={service.icon} /></div>
+              <span class="service-num">{service.num}</span>
+              <h2 class="service-title">{service.name}</h2>
+              <p class="service-desc">{service.short}</p>
+              <ul class="service-bullets">
+                {service.bullets.map((b) => <li>{b}</li>)}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    SERVICES.map((service, i) => (
+      <section class="content-section" id={`${service.id}-detail`}>
+        <div class="container">
+          <div class="prose reveal-on-scroll">
+            <span class="eyebrow">{service.num}</span>
+            <h2>{service.name}</h2>
+            {service.detail.map((p) => (
+              <p>{p}</p>
+            ))}
+            <ul>
+              {service.bullets.map((b) => (
+                <li>{b}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+    ))
+  }
+
+  <FAQ faqs={serviceFaqs} title="Common questions about our services." />
+  <CTA title="Not sure which of these you need?" desc="Tell us the problem, not the solution — we'll tell you what it actually takes to fix it." />
+</BaseLayout>

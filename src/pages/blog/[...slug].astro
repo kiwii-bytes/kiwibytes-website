@@ -1,0 +1,92 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CTA from '../../components/CTA.astro';
+import Icon from '../../components/Icon.astro';
+import { withBase, SITE_NAME } from '../../consts.js';
+import { organizationSchema, blogPostingSchema, breadcrumbSchema } from '../../lib/schema.js';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const schema = [
+  organizationSchema(),
+  blogPostingSchema({
+    title: post.data.title,
+    description: post.data.description,
+    slug: post.id,
+    publishDate: post.data.publishDate,
+    updatedDate: post.data.updatedDate,
+    tags: post.data.tags,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: post.data.title, path: `/blog/${post.id}` },
+  ]),
+];
+
+const dateFmt = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+
+// Rough reading time — honest estimate, not a precise claim.
+const words = post.body?.split(/\s+/).length ?? 0;
+const readingMinutes = Math.max(1, Math.round(words / 200));
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  schema={schema}
+  ogType="article"
+>
+  <article>
+    <header class="post-header">
+      <div class="container post-header-inner">
+        <a href={withBase('/blog')} class="back-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          All posts
+        </a>
+
+        <h1 class="post-title">{post.data.title}</h1>
+
+        <div class="post-meta">
+          <time datetime={post.data.publishDate.toISOString()}>
+            {dateFmt.format(post.data.publishDate)}
+          </time>
+          <span aria-hidden="true">·</span>
+          <span>{readingMinutes} min read</span>
+          <span aria-hidden="true">·</span>
+          <span>{SITE_NAME}</span>
+        </div>
+
+        {
+          post.data.tags.length > 0 && (
+            <div class="tag-row">
+              {post.data.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </header>
+
+    <div class="post-body">
+      <div class="container">
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <CTA />
+</BaseLayout>

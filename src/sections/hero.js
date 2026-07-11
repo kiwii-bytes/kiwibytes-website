@@ -42,6 +42,8 @@ function animateCounter(el) {
 
 export function initHero() {
   const hero = document.getElementById('hero-section');
+  if (!hero) return; // only the homepage has the animated hero
+
   // The gradient line relies on `background-clip: text` against its own
   // direct text content -- splitting it into per-char spans breaks that
   // rendering technique, so it's animated as a single block instead.

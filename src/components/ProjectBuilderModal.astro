@@ -1,0 +1,158 @@
+---
+// Multi-step lead capture. Logic lives in src/modal/projectBuilder.js and is
+// keyed off these exact ids/classes -- don't rename them without updating it.
+---
+
+<div class="modal-overlay" id="project-builder-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+  <div class="modal-box" data-lenis-prevent>
+    <button class="modal-close" type="button" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-progress"><div class="progress-bar-fill" id="modal-progress-bar"></div></div>
+
+    <form id="project-builder-form">
+      <!-- Step 1 -->
+      <div class="modal-step-content active" data-step="1">
+        <div class="modal-header">
+          <span class="step-indicator">Step 1 of 3</span>
+          <h3 class="modal-title" id="modal-heading">What are we building?</h3>
+          <p class="modal-subtitle">Select all services you require for this project.</p>
+        </div>
+        <div class="services-select-grid">
+          <label class="select-card">
+            <input type="checkbox" name="services" value="web" class="hidden-checkbox">
+            <div class="card-inner">
+              <span class="checkbox-circle"></span>
+              <span class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+              <span class="card-label">Web Dev</span>
+            </div>
+          </label>
+          <label class="select-card">
+            <input type="checkbox" name="services" value="app" class="hidden-checkbox">
+            <div class="card-inner">
+              <span class="checkbox-circle"></span>
+              <span class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span>
+              <span class="card-label">App Dev</span>
+            </div>
+          </label>
+          <label class="select-card">
+            <input type="checkbox" name="services" value="ai" class="hidden-checkbox">
+            <div class="card-inner">
+              <span class="checkbox-circle"></span>
+              <span class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.2 6.8H21l-5.6 4.1 2.2 6.8L12 15.6l-5.6 4.1 2.2-6.8L3 8.8h6.8z"/></svg></span>
+              <span class="card-label">AI &amp; Automation</span>
+            </div>
+          </label>
+          <label class="select-card">
+            <input type="checkbox" name="services" value="agents" class="hidden-checkbox">
+            <div class="card-inner">
+              <span class="checkbox-circle"></span>
+              <span class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2"/><circle cx="18" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><line x1="7.4" y1="7.4" x2="11" y2="16.2"/><line x1="16.6" y1="7.4" x2="13" y2="16.2"/><line x1="8" y1="6" x2="16" y2="6"/></svg></span>
+              <span class="card-label">AI Agents</span>
+            </div>
+          </label>
+          <label class="select-card">
+            <input type="checkbox" name="services" value="cloud" class="hidden-checkbox">
+            <div class="card-inner">
+              <span class="checkbox-circle"></span>
+              <span class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a5.5 5.5 0 1 1 1.8-10.7 6 6 0 0 1 11.2 3.2 4 4 0 0 1-.5 7.5z"/></svg></span>
+              <span class="card-label">Cloud/DevOps</span>
+            </div>
+          </label>
+          <label class="select-card">
+            <input type="checkbox" name="services" value="shopify" class="hidden-checkbox">
+            <div class="card-inner">
+              <span class="checkbox-circle"></span>
+              <span class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+              <span class="card-label">Shopify Store</span>
+            </div>
+          </label>
+        </div>
+        <span class="validation-message" id="step1-validation">Select at least one service to continue.</span>
+        <div class="modal-actions">
+          <span></span>
+          <button type="button" class="btn btn-primary modal-next"><span id="next-btn-text">Continue</span></button>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="modal-step-content" data-step="2">
+        <div class="modal-header">
+          <span class="step-indicator">Step 2 of 3</span>
+          <h3 class="modal-title">Scope &amp; budget</h3>
+          <p class="modal-subtitle">Give us a rough budget so we can recommend the right tier.</p>
+        </div>
+        <div class="range-group">
+          <div class="range-labels">
+            <span class="field-label">Budget</span>
+            <span class="range-value">&#8377;<span id="budget-value">75,000</span></span>
+          </div>
+          <input type="range" id="budget-range" class="custom-range" min="10000" max="500000" step="5000" value="75000" aria-label="Project budget in rupees">
+          <div class="slider-ticks"><span>&#8377;10K</span><span>&#8377;5L+</span></div>
+        </div>
+        <div class="estimator-dashboard">
+          <div class="estimator-tier" id="tier-mvp" role="button" tabindex="0" data-budget="25000">
+            <span class="tier-name">Starter</span>
+            <span class="tier-desc">&lt; &#8377;50K</span>
+          </div>
+          <div class="estimator-tier active" id="tier-pro" role="button" tabindex="0" data-budget="100000">
+            <span class="tier-name">Growth</span>
+            <span class="tier-desc">&#8377;50K – &#8377;2L</span>
+          </div>
+          <div class="estimator-tier" id="tier-enterprise" role="button" tabindex="0" data-budget="300000">
+            <span class="tier-name">Enterprise</span>
+            <span class="tier-desc">&gt; &#8377;2L</span>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary modal-back">Back</button>
+          <button type="button" class="btn btn-primary modal-next"><span id="next-btn-text-2">Continue</span></button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="modal-step-content" data-step="3">
+        <div class="modal-header">
+          <span class="step-indicator">Step 3 of 3</span>
+          <h3 class="modal-title">How do we reach you?</h3>
+          <p class="modal-subtitle">We'll send your scoped estimate within 1 business day.</p>
+        </div>
+        <div class="form-grid">
+          <div class="form-field full-width">
+            <input type="text" id="client-name" placeholder=" " required>
+            <label for="client-name">Your name</label>
+            <span class="error-text">Please enter your name.</span>
+          </div>
+          <div class="form-field full-width">
+            <input type="email" id="client-email" placeholder=" " required>
+            <label for="client-email">Email address</label>
+            <span class="error-text">Please enter a valid email.</span>
+          </div>
+        </div>
+        <span class="validation-message" id="submit-error">Couldn't send your request &mdash; please try again or email us directly.</span>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-secondary modal-back">Back</button>
+          <button type="submit" class="btn btn-primary" id="submit-btn"><span id="submit-btn-text">Submit Blueprint</span></button>
+        </div>
+      </div>
+
+      <!-- Step 4: Success -->
+      <div class="modal-step-content" data-step="4">
+        <div class="success-content">
+          <div class="success-icon-wrapper">
+            <svg class="checkmark" viewBox="0 0 52 52" aria-hidden="true"><circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+          </div>
+          <h3 class="success-title">Blueprint received.</h3>
+          <!-- Accurate wording: the EmailJS template delivers to Kiwi Bytes, it
+               does NOT send the client a copy. Don't claim it does. -->
+          <p class="success-text">
+            Thanks — we've got your brief. We'll reply to
+            <span id="success-email-placeholder" class="success-highlight">you</span>
+            within 1 business day.
+          </p>
+          <button type="button" class="btn btn-secondary close-modal-btn" style="margin-top: 2rem;">Close</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+import { withBase } from '../consts.js';
+
+interface Props {
+  title?: string;
+  desc?: string;
+}
+const {
+  title = 'Ready to build something that actually ships?',
+  desc = "Tell us what you're building — we'll come back with a scoped estimate within 1 business day.",
+} = Astro.props;
+---
+
+<section id="cta-section" class="cta">
+  <div class="container cta-container reveal-on-scroll">
+    <span class="eyebrow">Let's build</span>
+    <h2 class="cta-title">{title}</h2>
+    <p class="cta-desc">{desc}</p>
+    <div class="cta-actions">
+      <button class="btn btn-primary trigger-project-builder" type="button">
+        <span>Launch Project Builder</span>
+        <Icon name="arrow" size={16} />
+      </button>
+      <a href={withBase('/contact')} class="btn btn-secondary"><span>Or just email us</span></a>
+    </div>
+  </div>
+</section>

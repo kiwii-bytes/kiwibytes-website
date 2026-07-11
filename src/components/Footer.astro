@@ -1,0 +1,55 @@
+---
+import { withBase, CONTACT_EMAIL, LOCATION, SOCIALS } from '../consts.js';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <img class="logo-mark" src={withBase('kiwi-logo.png')} alt="" width="32" height="32" />
+          <span class="logo-kiwi">kiwi</span><span class="logo-bytes">bytes</span><span class="logo-dot">.</span>
+        </div>
+        <p class="footer-tagline">
+          A software engineering studio in {LOCATION} building web platforms, AI agents,
+          and commerce systems.
+        </p>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Services</div>
+        <div class="footer-links">
+          <a href={withBase('/services#web')} class="footer-link">Web Engineering</a>
+          <a href={withBase('/services#ai')} class="footer-link">AI &amp; LLM Integration</a>
+          <a href={withBase('/services#agents')} class="footer-link">Autonomous Agents</a>
+          <a href={withBase('/services#cloud')} class="footer-link">Cloud &amp; DevOps</a>
+          <a href={withBase('/services#shopify')} class="footer-link">Shopify &amp; Commerce</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Company</div>
+        <div class="footer-links">
+          <a href={withBase('/about')} class="footer-link">About</a>
+          <a href={withBase('/work')} class="footer-link">Work</a>
+          <a href={withBase('/products')} class="footer-link">Products</a>
+          <a href={withBase('/blog')} class="footer-link">Blog</a>
+          <a href={withBase('/contact')} class="footer-link">Contact</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Get in touch</div>
+        <div class="footer-links">
+          <a href={`mailto:${CONTACT_EMAIL}`} class="footer-link">{CONTACT_EMAIL}</a>
+          <a href={SOCIALS.github} class="footer-link" rel="noopener">GitHub</a>
+          <span class="footer-note">{LOCATION}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">© {year} Kiwi Bytes. All rights reserved.</div>
+  </div>
+</footer>
