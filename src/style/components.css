@@ -62,7 +62,19 @@ h1, h2, h3, h4, .logo, .btn, .nav-link {
   background: var(--accent);
 }
 
-/* Header */
+/* ==========================================================================
+   Header.
+
+   At the top of the page it's a plain full-width bar (transparent, flush).
+   Once scrolled, it MORPHS into a floating pill: the bar detaches from the
+   edges, shrinks in height, and the inner container becomes a frosted capsule.
+
+   The background/blur/shadow live on .header-container (the pill), NOT on
+   .header -- .header stays transparent when scrolled so the pill can float
+   with a visible gap around it.
+
+   No JS needed: the .scrolled class is already toggled by initHeaderScrollState.
+   ========================================================================== */
 .header {
   position: fixed;
   top: 0;
@@ -72,16 +84,19 @@ h1, h2, h3, h4, .logo, .btn, .nav-link {
   z-index: 100;
   display: flex;
   align-items: center;
+  padding: 0;
   background: transparent;
-  border-bottom: 1px solid transparent;
-  transition: background-color 0.4s var(--ease-premium), border-color 0.4s var(--ease-premium);
+  transition:
+    height 0.45s var(--ease-premium),
+    padding 0.45s var(--ease-premium);
 }
 
 .header.scrolled {
-  background-color: var(--bg-overlay);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom-color: var(--border-color);
+  height: var(--header-height-scrolled);
+  /* Insets the pill from the viewport edges. On wide screens the inner
+     container is already max-width capped and centred, so the logo doesn't
+     visibly jump horizontally when this kicks in. */
+  padding: 0 1.25rem;
 }
 
 .header-container {
@@ -89,6 +104,27 @@ h1, h2, h3, h4, .logo, .btn, .nav-link {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  height: 100%;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
+  transition:
+    height 0.45s var(--ease-premium),
+    border-radius 0.45s var(--ease-premium),
+    background-color 0.45s var(--ease-premium),
+    border-color 0.45s var(--ease-premium),
+    box-shadow 0.45s var(--ease-premium);
+}
+
+.header.scrolled .header-container {
+  /* Slightly shorter than the header, so there's an even gap above and below
+     the pill (the header is a centring flex row). */
+  height: calc(100% - 14px);
+  border-radius: 999px;
+  background-color: var(--header-pill-bg);
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-card-hover);
 }
 
 .logo {
@@ -238,6 +274,11 @@ h1, h2, h3, h4, .logo, .btn, .nav-link {
 @media (max-width: 768px) {
   .header .nav, .header .btn-desktop { display: none; }
   .mobile-menu-toggle { display: flex; }
+
+  /* Tighter gap around the pill on small screens, so it doesn't eat the
+     limited horizontal room the logo + toggles need. */
+  .header.scrolled { padding: 0 0.75rem; }
+  .header.scrolled .header-container { height: calc(100% - 10px); }
 }
 
 /* Footer */
